@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/index.js",
+    "build": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "nodemon": "^1.18.3",
-    "webpack": "^4.16.1"
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0"
   }
 }

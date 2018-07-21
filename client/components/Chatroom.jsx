@@ -1,5 +1,5 @@
 import React from 'react';
-import Chatbox from './Chatbox';
+import Chatbox from './Chatbox.jsx';
 
 class Chatroom extends React.Component {
   constructor() {
