@@ -11,7 +11,6 @@ class Chatbox extends React.Component {
   };
   
   componentDidMount() {
-    const messageServer = new WebSocket('ws://localhost:3000');
   }
 
   handleChange(event) {
@@ -21,7 +20,7 @@ class Chatbox extends React.Component {
   }
 
   handlePost() {
-    messageServer.send(this.state.message);
+    
   }
 
   render() {

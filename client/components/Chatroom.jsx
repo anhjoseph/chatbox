@@ -1,4 +1,5 @@
 import React from 'react';
+import Display from './Display.jsx';
 import Chatbox from './Chatbox.jsx';
 
 class Chatroom extends React.Component {
@@ -7,9 +8,15 @@ class Chatroom extends React.Component {
     this.state = {};
   };
 
+  componentDidMount() {
+  }
+
   render() {
     return (
-      <Chatbox />
+      <div>
+        <Display />
+        <Chatbox />
+      </div>
     )
   }
 };
