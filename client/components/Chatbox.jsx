@@ -9,9 +9,6 @@ class Chatbox extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
   };
-  
-  componentDidMount() {
-  }
 
   handleChange(event) {
     this.setState({
@@ -20,7 +17,9 @@ class Chatbox extends React.Component {
   }
 
   handlePost() {
-    
+    const socketIO = socketIOClient('http://localhost:3000');
+    socketIO.emit('send', this.state.message);
+    console.log('submitted post');
   }
 
   render() {
@@ -28,7 +27,7 @@ class Chatbox extends React.Component {
       <div>
         <form>
           <input onChange={this.handleChange}/>
-          <button onSubmit={this.handlePost}></button>
+          <button onSubmit={this.handlePost}>Send</button>
         </form>
       </div>
     )
