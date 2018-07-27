@@ -1,4 +1,5 @@
 import React from 'react';
+import socketIOClient from 'socket.io-client';
 
 class Chatbox extends React.Component {
   constructor(props) {
@@ -10,24 +11,24 @@ class Chatbox extends React.Component {
     this.handlePost = this.handlePost.bind(this);
   };
 
-  handleChange(event) {
+  handleChange(e) {
     this.setState({
-      message: event.target.value
+      message: e.target.value
     });
   }
 
-  handlePost() {
-    const socketIO = socketIOClient('http://localhost:3000');
-    socketIO.emit('send', this.state.message);
-    console.log('submitted post');
+  handlePost(e) {
+    e.preventDefault();
+    const socket = socketIOClient('http://localhost:3000');
+    socket.emit('send', this.state.message);
   }
 
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.handlePost}>
           <input onChange={this.handleChange}/>
-          <button onSubmit={this.handlePost}>Send</button>
+          <button>Send</button>
         </form>
       </div>
     )

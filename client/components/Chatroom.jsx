@@ -6,23 +6,23 @@ import socketIOClient from 'socket.io-client';
 class Chatroom extends React.Component {
   constructor() {
     super();
+    const socket = socketIOClient('http://localhost:3000');
+    socket.on('send', (msg) => {
+      this.setState({
+        messages: [...this.state.messages, msg]
+      });
+    });
+
     this.state = {
       messages: []
     };
   };
 
   render() {
-    const socketIO = socketIOClient('http://localhost:3000');
-    socketIO.on('send', (msg) => {
-      this.setState({
-        messages: [...messages, msg]
-      });
-    })
-
     return (
       <div>
         <Messages messages={this.state.messages}/>
-        <Chatbox socketIO={socketIO}/>
+        <Chatbox />
       </div>
     )
   }

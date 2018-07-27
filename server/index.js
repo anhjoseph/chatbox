@@ -12,19 +12,14 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-
-  socket.on('send', (msg) => {
-    console.log(msg);
-    io.sockets.emit('send', msg);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('a user disconnected');
-  });
-});
-
 server.listen(port, () => {
   console.log(`server running at ${port}`);
+
+  io.on('connection', (socket) => {
+
+    socket.on('send', (msg) => {
+      io.emit('send', msg);
+    });
+
+  });
 });

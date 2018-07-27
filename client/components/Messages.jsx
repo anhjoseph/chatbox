@@ -6,9 +6,6 @@ class Messages extends React.Component {
     super(props);
     this.state = {};
   }
-
-  componentDidMount() {
-  }
   
   render() {
     return (
