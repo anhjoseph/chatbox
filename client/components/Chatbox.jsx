@@ -19,6 +19,7 @@ class Chatbox extends React.Component {
 
   handlePost(e) {
     e.preventDefault();
+    e.target.reset();
     const socket = socketIOClient('http://localhost:3000');
     socket.emit('send', this.state.message);
   }
