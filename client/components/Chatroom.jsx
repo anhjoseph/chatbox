@@ -23,15 +23,18 @@ class Chatroom extends React.Component {
 
   componentDidMount() {
     this.fetchMessages();
-  }
+  };
 
   fetchMessages() {
     //grab messages from database
-  }
+  };
 
   render() {
     return (
       <div>
+        <div>
+          CHATTERBOX
+        </div>
         <Messages messages={this.state.messages} />
         <Chatbox />
       </div>
