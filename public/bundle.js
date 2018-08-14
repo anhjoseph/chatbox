@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./client/components/App.jsx":
+/*!***********************************!*\
+  !*** ./client/components/App.jsx ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Chatroom = __webpack_require__(/*! ./Chatroom.jsx */ \"./client/components/Chatroom.jsx\");\n\nvar _Chatroom2 = _interopRequireDefault(_Chatroom);\n\nvar _Login = __webpack_require__(/*! ./Login.jsx */ \"./client/components/Login.jsx\");\n\nvar _Login2 = _interopRequireDefault(_Login);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App(props) {\n  if (props.isLoggedIn) {\n    return _react2.default.createElement(_Chatroom2.default, null);\n  } else {\n    return _react2.default.createElement(_Login2.default, null);\n  }\n};\n\nexports.default = App;\n\n//# sourceURL=webpack:///./client/components/App.jsx?");
+
+/***/ }),
+
 /***/ "./client/components/Chatbox.jsx":
 /*!***************************************!*\
   !*** ./client/components/Chatbox.jsx ***!
@@ -107,6 +119,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 "use strict";
 eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Messages = __webpack_require__(/*! ./Messages.jsx */ \"./client/components/Messages.jsx\");\n\nvar _Messages2 = _interopRequireDefault(_Messages);\n\nvar _Chatbox = __webpack_require__(/*! ./Chatbox.jsx */ \"./client/components/Chatbox.jsx\");\n\nvar _Chatbox2 = _interopRequireDefault(_Chatbox);\n\nvar _socket = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/lib/index.js\");\n\nvar _socket2 = _interopRequireDefault(_socket);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Chatroom = function (_React$Component) {\n  _inherits(Chatroom, _React$Component);\n\n  function Chatroom() {\n    _classCallCheck(this, Chatroom);\n\n    var _this = _possibleConstructorReturn(this, (Chatroom.__proto__ || Object.getPrototypeOf(Chatroom)).call(this));\n\n    var socket = (0, _socket2.default)('http://localhost:3000');\n    socket.on('send', function (msg) {\n      _this.setState({\n        messages: [].concat(_toConsumableArray(_this.state.messages), [msg])\n      });\n    });\n\n    _this.state = {\n      messages: []\n    };\n\n    _this.fetchMessages = _this.fetchMessages.bind(_this);\n    return _this;\n  }\n\n  _createClass(Chatroom, [{\n    key: 'componentDidMount',\n    value: function componentDidMount() {\n      this.fetchMessages();\n    }\n  }, {\n    key: 'fetchMessages',\n    value: function fetchMessages() {\n      //grab messages from database\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n          'div',\n          null,\n          'CHATTERBOX'\n        ),\n        _react2.default.createElement(_Messages2.default, { messages: this.state.messages }),\n        _react2.default.createElement(_Chatbox2.default, null)\n      );\n    }\n  }]);\n\n  return Chatroom;\n}(_react2.default.Component);\n\n;\n\nexports.default = Chatroom;\n\n//# sourceURL=webpack:///./client/components/Chatroom.jsx?");
+
+/***/ }),
+
+/***/ "./client/components/Login.jsx":
+/*!*************************************!*\
+  !*** ./client/components/Login.jsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login() {\n  return _react2.default.createElement(\n    \"div\",\n    null,\n    _react2.default.createElement(\n      \"form\",\n      { action: \"/login\", method: \"post\" },\n      _react2.default.createElement(\n        \"div\",\n        null,\n        _react2.default.createElement(\n          \"label\",\n          null,\n          \"Username:\"\n        ),\n        _react2.default.createElement(\"input\", { type: \"text\", name: \"username\" })\n      ),\n      _react2.default.createElement(\n        \"div\",\n        null,\n        _react2.default.createElement(\n          \"label\",\n          null,\n          \"Password:\"\n        ),\n        _react2.default.createElement(\"input\", { type: \"password\", name: \"password\" })\n      ),\n      _react2.default.createElement(\n        \"div\",\n        null,\n        _react2.default.createElement(\"input\", { type: \"submit\", value: \"Log In\" })\n      )\n    )\n  );\n};\n\nexports.default = Login;\n\n//# sourceURL=webpack:///./client/components/Login.jsx?");
 
 /***/ }),
 
@@ -142,7 +166,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _Chatroom = __webpack_require__(/*! ./components/Chatroom.jsx */ \"./client/components/Chatroom.jsx\");\n\nvar _Chatroom2 = _interopRequireDefault(_Chatroom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_reactDom2.default.render(_react2.default.createElement(_Chatroom2.default, null), document.getElementById('Chatroom'));\n\n//# sourceURL=webpack:///./client/index.jsx?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _App = __webpack_require__(/*! ./components/App.jsx */ \"./client/components/App.jsx\");\n\nvar _App2 = _interopRequireDefault(_App);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_reactDom2.default.render(_react2.default.createElement(_App2.default, { isLoggedIn: false }), document.getElementById('root'));\n\n//# sourceURL=webpack:///./client/index.jsx?");
 
 /***/ }),
 
