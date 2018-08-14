@@ -2,11 +2,20 @@ import React from 'react';
 import Chatroom from './Chatroom.jsx';
 import Login from './Login.jsx';
 
-const App = (props) => {
-  if (props.isLoggedIn) {
-    return <Chatroom />;
-  } else {
-    return <Login />;
+class App extends React.Component() {
+  constructor() {
+    super();
+    this.state = {
+      isLoggedIn: false
+    }
+  }
+
+  render() {
+    if (this.state.isLoggedIn) {
+      return <Chatroom />;
+    } else {
+      return <Authorize isLoggedIn={this.state.isLoggedIn}/>;
+    }
   }
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Login = (props) => (
+const Signup = () => {
   <div>
-    <form action="/login" method="post">
+    <form action="/signup" method="post">
       <div>
         <label>Username:</label>
         <input type="text" name="username"/>
@@ -12,13 +12,10 @@ const Login = (props) => (
         <input type="password" name="password"/>
       </div>
       <div>
-        <input type="submit" value="Log In"/>
+        <input type="submit" value="Sign Up"/>
       </div>
     </form>
-    <button onClick={}>
-      Sign Up
-    </button>
   </div>
-)
+};
 
-export default Login;
+export default Signup;
