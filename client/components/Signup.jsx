@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Signup = () => {
+const Signup = () => (
   <div>
     <form action="/signup" method="post">
       <div>
@@ -16,6 +16,6 @@ const Signup = () => {
       </div>
     </form>
   </div>
-};
+);
 
 export default Signup;

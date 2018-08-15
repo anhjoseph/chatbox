@@ -34,7 +34,7 @@ class Login extends React.Component {
             </div>
           </form>
 
-          <button onclick={this.handleClick}>
+          <button onClick={this.handleClick}>
             Sign Up
           </button>
         </div>
