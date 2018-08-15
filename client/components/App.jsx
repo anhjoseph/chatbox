@@ -2,7 +2,7 @@ import React from 'react';
 import Chatroom from './Chatroom.jsx';
 import Login from './Login.jsx';
 
-class App extends React.Component() {
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -11,12 +11,12 @@ class App extends React.Component() {
   }
 
   render() {
-    if (this.state.isLoggedIn) {
+    // if (this.state.isLoggedIn) {
       return <Chatroom />;
-    } else {
-      return <Authorize isLoggedIn={this.state.isLoggedIn}/>;
+    // } else {
+      // return <Login isLoggedIn={this.state.isLoggedIn}/>;
     }
-  }
+  // }
 }
 
 export default App;

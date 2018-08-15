@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 
-class Authorize extends React.Component() {
+class Authorize extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -1,5 +1,5 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -17,7 +17,3 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-
-module.export = {
-  passport: passport
-};
