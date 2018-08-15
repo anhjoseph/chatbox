@@ -3,14 +3,13 @@ const http = require('http');
 const path = require('path');
 const parser = require('body-parser');
 const passport = require('passport');
-const session = require('express-session');
+// const session = require('express-session');
+const { router } = require('./router');
 
 const app = express();
 const port = 3000;
 const server = http.createServer(app);
 const io = require('socket.io')(server);
-
-require('./authentication');
 
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
@@ -18,12 +17,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // app.use(session({  }))
 app.use(passport.initialize());
 // app.use(passport.session());
-
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-}));
+app.use('/', router);
 
 server.listen(port, () => {
   console.log(`server running at ${port}`);

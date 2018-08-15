@@ -17,3 +17,15 @@ passport.use(new LocalStrategy(
     });
   }
 ));
+
+const Authenticate = {
+  POST: (req, res) => {
+    passport.authenticate('local', (req, res) => {
+      res.status(201).send(req.user.username);
+    });
+  }
+}
+
+module.exports = {
+  Authenticate: Authenticate
+};
