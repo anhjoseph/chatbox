@@ -19,6 +19,8 @@ app.use(passport.initialize());
 // app.use(passport.session());
 app.use('/', router);
 
+require('../db/config');
+
 server.listen(port, () => {
   console.log(`server running at ${port}`);
 

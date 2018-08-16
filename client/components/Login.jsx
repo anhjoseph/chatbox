@@ -1,5 +1,6 @@
 import React from 'react';
 import Signup from './Signup.jsx';
+import axios from 'axios';
 
 class Login extends React.Component {
   constructor(props) {
@@ -8,13 +9,25 @@ class Login extends React.Component {
       hasProfile: true
     }
     this.handleClick = this.handleClick.bind(this);
-  }
+    this.handleSignup = this.handleSignup.bind(this);
+  };
 
   handleClick() {
     this.setState({
       hasProfile: false
     });
-  }
+  };
+
+  handleSignup() {
+    axios.post('/auth/signup', {
+      username: this.state.username,
+      password: this.state.password
+    }).done(() => {
+      this.setState({
+        hasProfile: true
+      })
+    });
+  };
 
   render() {
     if (this.state.hasProfile) {
@@ -41,7 +54,7 @@ class Login extends React.Component {
       )
     } else {
       return (
-        <Signup />
+        <Signup handleSignup={this.handleSignup}/>
       )
     }
   }

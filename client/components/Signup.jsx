@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Signup = () => (
+const Signup = (props) => (
   <div>
-    <form action="/signup" method="post">
+    <form onSubmit={props.handleSignup}>
       <div>
         <label>Username:</label>
         <input type="text" name="username"/>
@@ -16,6 +16,6 @@ const Signup = () => (
       </div>
     </form>
   </div>
-);
+)
 
 export default Signup;
