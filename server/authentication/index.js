@@ -1,5 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const { User } = require('../../db/models');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -24,7 +25,7 @@ const Authenticate = {
       res.status(201).send(req.user.username);
     });
   }
-}
+};
 
 module.exports = {
   Authenticate: Authenticate
