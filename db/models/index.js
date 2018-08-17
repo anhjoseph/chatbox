@@ -33,7 +33,7 @@ Message.belongsTo(Room);
 Room.hasMany(User);
 User.belongsTo(Room);
 
-db.sync({ force: true })
+db.sync({ force: false })
   .then(() => console.log('successfully connected to db'))
   .catch(err => console.log('error syncing to database', err))
 

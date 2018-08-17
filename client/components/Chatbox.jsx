@@ -2,8 +2,8 @@ import React from 'react';
 import socketIOClient from 'socket.io-client';
 
 class Chatbox extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       message: ''
     };
@@ -18,9 +18,9 @@ class Chatbox extends React.Component {
   }
 
   handlePost(e) {
+    const socket = socketIOClient('http://localhost:3000');
     e.preventDefault();
     e.target.reset();
-    const socket = socketIOClient('http://localhost:3000');
     socket.emit('send', this.state.message);
   }
 

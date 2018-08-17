@@ -1,7 +1,6 @@
 import React from 'react';
 import Chatroom from './Chatroom.jsx';
-import Login from './Login.jsx';
-import axios from 'axios';
+import Authenticate from './Authenticate.jsx';
 
 class App extends React.Component {
   constructor() {
@@ -9,28 +8,12 @@ class App extends React.Component {
     this.state = {
       isLoggedIn: false
     };
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.toggleStatus = this.toggleStatus.bind(this);
   }
 
-  handleChange(e) {
+  toggleStatus() {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleLogin() {
-    axios.post('/auth/login', {
-      username: this.state.username,
-      password: this.state.password,
-    }).done(({ user }) => {
-      if (user) {
-        this.setState({
-          isLoggedIn: true
-        })
-      }
-    }).catch(err => {
-      console.log('error logging in', err);
+      isLoggedIn: true
     })
   }
 
@@ -38,9 +21,9 @@ class App extends React.Component {
     if (this.state.isLoggedIn) {
       return <Chatroom />;
     } else {
-      return <Login handleLogin={this.handleLogin} handleChange={this.handleChange} />;
+      return <Authenticate toggleStatus={this.toggleStatus} />;
     }
   }
-}
+};
 
 export default App;

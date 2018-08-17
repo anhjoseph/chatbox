@@ -5,17 +5,17 @@ const Signup = (props) => (
     <form onSubmit={props.handleSignup}>
       <div>
         <label>Username:</label>
-        <input type="text" name="username"/>
+        <input type="text" name="username" onChange={props.handleChange}/>
       </div>
       <div>
         <label>Password:</label>
-        <input type="password" name="password"/>
+        <input type="password" name="password" onChange={props.handleChange}/>
       </div>
       <div>
         <input type="submit" value="Sign Up"/>
       </div>
     </form>
   </div>
-)
+);
 
 export default Signup;
