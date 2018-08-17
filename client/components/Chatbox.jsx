@@ -28,7 +28,7 @@ class Chatbox extends React.Component {
     return (
       <div>
         <form onSubmit={this.handlePost}>
-          <input onChange={this.handleChange}/>
+          <input onChange={this.handleChange} />
           <button>Send</button>
         </form>
       </div>

@@ -35,7 +35,6 @@ class Authenticate extends React.Component {
       username: this.state.username,
       password: this.state.password
     }).then(user => {
-      console.log(user);
       if (user) {
         this.props.toggleStatus();
       }
@@ -53,6 +52,8 @@ class Authenticate extends React.Component {
       this.setState({
         hasProfile: true
       })
+    }).catch(err => {
+      console.log('error signing up', err);
     })
   }
 
