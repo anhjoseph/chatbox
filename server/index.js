@@ -5,6 +5,7 @@ const parser = require('body-parser');
 // const passport = require('passport');
 // const session = require('express-session');
 const { router } = require('./router');
+const { MessagesController } = require('./controllers/messages');
 
 const app = express();
 const port = 3000;
@@ -19,14 +20,18 @@ app.use(express.static(path.join(__dirname, '../public')));
 // app.use(session({  }))
 // app.use(passport.initialize());
 // app.use(passport.session());
-app.use('/', router);
+app.use('/auth', router);
+app.use('/api', router);
 
 server.listen(port, () => {
   console.log(`server running at ${port}`);
 
   io.on('connection', (socket) => {
+
     socket.on('send', (msg) => {
+      MessagesController.POST(msg);
       io.emit('send', msg);
     });
+
   });
 });

@@ -27,11 +27,11 @@ const Message = db.define('Message', {
   }
 });
 
-Room.hasMany(Message);
-Message.belongsTo(Room);
+// Room.hasMany(Message);
+// Message.belongsTo(Room);
 
-Room.hasMany(User);
-User.belongsTo(Room);
+// Room.hasMany(User);
+// User.belongsTo(Room);
 
 db.sync({ force: false })
   .then(() => console.log('successfully connected to db'))

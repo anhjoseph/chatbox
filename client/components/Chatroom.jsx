@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import socketIOClient from 'socket.io-client';
 
-class Chatroom extends React.Component {
+class Chatroom extends Component {
   constructor() {
     super();
 
@@ -23,11 +23,17 @@ class Chatroom extends React.Component {
 
   componentDidMount() {
     this.fetchMessages();
-  };
+  }
 
   fetchMessages() {
-    //grab messages from database
-  };
+    axios.get('/api/messages').then(messages => {
+      this.setState({
+        messages: messages
+      })
+    }).catch(err => {
+      console.log('error fetching messages', err);
+    })
+  }
 
   render() {
     return (

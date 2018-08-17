@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 
-class Authenticate extends React.Component {
+class Authenticate extends Component {
   constructor(props) {
     super(props);
     this.state = {

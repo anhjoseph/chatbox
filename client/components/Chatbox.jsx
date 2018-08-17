@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import socketIOClient from 'socket.io-client';
 
-class Chatbox extends React.Component {
+class Chatbox extends Component {
   constructor() {
     super();
     this.state = {
