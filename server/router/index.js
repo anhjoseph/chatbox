@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Authenticate } = require('../controllers/authentication');
+const { MessagesController } = require('../controllers/messages');
 
 router.route('/auth/login')
   .post(Authenticate.login)

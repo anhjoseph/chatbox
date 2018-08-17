@@ -9,12 +9,12 @@ class Chatbox extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
-  };
+  }
 
   handleChange(e) {
     this.setState({
       message: e.target.value
-    });
+    })
   }
 
   handlePost(e) {

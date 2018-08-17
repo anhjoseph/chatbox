@@ -12,7 +12,6 @@ const MessagesController = {
 
   GET: (req, res) => {
     Message.findAll({
-      
     }).then(messages => {
       console.log('messages === ', messages);
       res.status(200).send(messages);
