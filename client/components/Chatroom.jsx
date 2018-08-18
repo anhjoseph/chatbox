@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import socketIOClient from 'socket.io-client';
@@ -17,8 +18,6 @@ class Chatroom extends Component {
     this.state = {
       messages: []
     };
-
-    this.fetchMessages = this.fetchMessages.bind(this);
   };
 
   componentDidMount() {
@@ -26,9 +25,10 @@ class Chatroom extends Component {
   }
 
   fetchMessages() {
-    axios.get('/api/messages').then(messages => {
+    axios.get('/api/messages').then(({ data }) => {
+      console.log(data.message);
       this.setState({
-        messages: messages
+        messages: data
       })
     }).catch(err => {
       console.log('error fetching messages', err);

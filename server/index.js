@@ -20,8 +20,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // app.use(session({  }))
 // app.use(passport.initialize());
 // app.use(passport.session());
-app.use('/auth', router);
-app.use('/api', router);
+app.use('/', router);
 
 server.listen(port, () => {
   console.log(`server running at ${port}`);
