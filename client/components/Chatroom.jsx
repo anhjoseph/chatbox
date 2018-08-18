@@ -26,7 +26,6 @@ class Chatroom extends Component {
 
   fetchMessages() {
     axios.get('/api/messages').then(({ data }) => {
-      console.log(data.message);
       this.setState({
         messages: data
       })
@@ -34,7 +33,7 @@ class Chatroom extends Component {
       console.log('error fetching messages', err);
     })
   }
-
+  
   render() {
     return (
       <div>

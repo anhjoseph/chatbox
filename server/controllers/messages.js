@@ -12,8 +12,11 @@ const MessagesController = {
 
   GET: (req, res) => {
     Message.findAll({
-    }).then(messages => {
-      console.log('messages === ', messages);
+      
+    }).then(data => {
+      let messages = [...data].map((message) => {
+        return message.dataValues.message;
+      });
       res.status(200).send(messages);
     }).catch(err => {
       console.log('error fetching messages', err);
