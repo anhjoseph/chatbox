@@ -13,12 +13,12 @@ const User = db.define('User', {
   }
 });
 
-const Room = db.define('Room', {
-  roomname: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-});
+// const Room = db.define('Room', {
+//   roomname: {
+//     type: Sequelize.STRING,
+//     allowNull: false
+//   }
+// });
 
 const Message = db.define('Message', {
   message: {
@@ -27,11 +27,11 @@ const Message = db.define('Message', {
   }
 });
 
-Room.hasMany(Message);
-Message.belongsTo(Room);
+// Room.hasMany(Message);
+// Message.belongsTo(Room);
 
-Room.hasMany(User);
-User.belongsTo(Room);
+// Room.hasMany(User);
+// User.belongsTo(Room);
 
 db.sync({ force: false })
   .then(() => console.log('successfully connected to db'))
@@ -39,6 +39,6 @@ db.sync({ force: false })
 
 module.exports = {
   User: User,
-  Room: Room,
+  // Room: Room,
   Message: Message
 };
