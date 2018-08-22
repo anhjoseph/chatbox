@@ -13,12 +13,12 @@ const User = db.define('User', {
   }
 });
 
-// const Room = db.define('Room', {
-//   roomname: {
-//     type: Sequelize.STRING,
-//     allowNull: false
-//   }
-// });
+const Room = db.define('Room', {
+  roomname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
 
 const Message = db.define('Message', {
   message: {

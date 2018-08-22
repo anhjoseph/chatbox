@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import socketIOClient from 'socket.io-client';
 import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
-import socketIOClient from 'socket.io-client';
+import Channels from './Channels.jsx';
+import Members from './Members.jsx';
 
 class Chatroom extends Component {
   constructor() {
@@ -40,6 +42,8 @@ class Chatroom extends Component {
         <div>
           CHATTERBOX
         </div>
+        <Channels />
+        <Members />
         <Messages messages={this.state.messages} />
         <Chatbox />
       </div>
