@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { Authenticate } = require('../controllers/authentication');
-const { MessagesController } = require('../controllers/messages');
+const { MessageController } = require('../controllers/messages');
+const { ChannelController } = require('../controllers/channels');
+const { UserController } = require('../controllers/users');
 
 router.route('/auth/login')
   .post(Authenticate.login)
@@ -9,7 +11,13 @@ router.route('/auth/signup')
   .post(Authenticate.signup)
 
 router.route('/api/messages')
-  .get(MessagesController.GET)
+  .get(MessageController.GET)
+
+router.route('/api/channels')
+  .get(ChannelController.GET)
+
+router.route('/api/users')
+  .get(UserController.GET)
 
 module.exports = {
   router: router

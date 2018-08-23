@@ -1,6 +1,6 @@
 const { Message } = require('../../db/models');
 
-const MessagesController = {
+const MessageController = {
   POST: (msg) => {
     Message.create({ message: msg })
       .then(() => {
@@ -25,5 +25,5 @@ const MessagesController = {
 };
 
 module.exports = {
-  MessagesController: MessagesController
+  MessageController: MessageController
 };

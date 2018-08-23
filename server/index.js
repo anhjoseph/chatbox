@@ -5,7 +5,7 @@ const parser = require('body-parser');
 // const passport = require('passport');
 // const session = require('express-session');
 const { router } = require('./router');
-const { MessagesController } = require('./controllers/messages');
+const { MessageController } = require('./controllers/messages');
 
 const app = express();
 const port = 3000;
@@ -28,7 +28,7 @@ server.listen(port, () => {
   io.on('connection', (socket) => {
 
     socket.on('send', (msg) => {
-      MessagesController.POST(msg);
+      MessageController.POST(msg);
       io.emit('send', msg);
     });
 
