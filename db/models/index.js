@@ -13,8 +13,7 @@ const User = db.define('User', {
   },
 
   status: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   }
 }, {
   timestamps: false

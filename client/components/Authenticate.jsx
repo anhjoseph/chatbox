@@ -9,7 +9,8 @@ class Authenticate extends Component {
     this.state = {
       hasProfile: true,
       username: '',
-      password: ''
+      password: '',
+      status: false
     }
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);

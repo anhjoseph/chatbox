@@ -10,6 +10,8 @@ const { MessageController } = require('./controllers/messages');
 const app = express();
 const port = 3000;
 const server = http.createServer(app);
+
+//initialize a new instance of socket.io by passing in http object
 const io = require('socket.io')(server);
 
 require('../db/config');
@@ -25,11 +27,20 @@ app.use('/', router);
 server.listen(port, () => {
   console.log(`server running at ${port}`);
 
+  //listen on the (native) connection event for incoming sockets
   io.on('connection', (socket) => {
+    
+    socket.on('connect', () => {
+      
+    });
 
-    socket.on('send', (msg) => {
+    socket.on('message', (msg) => {
       MessageController.POST(msg);
-      io.emit('send', msg);
+      io.emit('message', msg);
+    });
+
+    socket.on('disconnect', () => {
+
     });
 
   });

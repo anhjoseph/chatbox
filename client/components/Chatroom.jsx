@@ -11,7 +11,7 @@ class Chatroom extends Component {
     super();
 
     const socket = socketIOClient('http://localhost:3000');
-    socket.on('send', (msg) => {
+    socket.on('message', (msg) => {
       this.setState({
         messages: [...this.state.messages, msg]
       });
@@ -26,7 +26,7 @@ class Chatroom extends Component {
 
   componentDidMount() {
     this.fetchMessages();
-    this.fetchRooms();
+    this.fetchChannels();
     this.fetchUsers();
   }
 
