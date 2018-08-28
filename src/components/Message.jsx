@@ -2,7 +2,12 @@ import React from 'react';
 
 const Message = (props) => (
   <div>
-    {props.message}
+    <div>
+      {props.message.timeStamp}
+    </div>
+    <div>
+      {props.message.text}
+    </div>
   </div>
 );
 

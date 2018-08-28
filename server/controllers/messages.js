@@ -2,7 +2,7 @@ const { Message } = require('../../db/models');
 
 const MessageController = {
   POST: (msg) => {
-    Message.create({ message: msg })
+    Message.create({ message: msg.text, createdAt: msg.timeStamp })
       .then(() => {
         console.log('successfully posted message');
       }).catch(err => {
@@ -15,7 +15,11 @@ const MessageController = {
       
     }).then(data => {
       let messages = [...data].map((message) => {
-        return message.dataValues.message;
+        console.log(message);
+        return {
+          message: message.dataValues.message,
+          timeStamp: message.dataValues.createdAt
+        };
       });
       res.status(200).send(messages);
     }).catch(err => {

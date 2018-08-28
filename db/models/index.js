@@ -37,13 +37,13 @@ const Message = db.define('Message', {
   updatedAt: false
 });
 
-Channel.hasMany(Message, { foreignKey: 'channel_id' });
-User.hasMany(Message, { foreignKey: 'user_id' });
+// Channel.hasMany(Message, { foreignKey: 'channel_id' });
+// User.hasMany(Message, { foreignKey: 'user_id' });
 
-Channel.belongsToMany(User, { through: 'Subscription', foreignKey: 'channel_id', timestamps: false });
-User.belongsToMany(Channel, { through: 'Subscription', foreignKey: 'user_id', timestamps: false });
+// Channel.belongsToMany(User, { through: 'Subscription', foreignKey: 'channel_id', timestamps: false });
+// User.belongsToMany(Channel, { through: 'Subscription', foreignKey: 'user_id', timestamps: false });
 
-db.sync({ force: true })
+db.sync({ force: false })
   .then(() => console.log('successfully connected to db'))
   .catch(err => console.log('error syncing to database', err))
 

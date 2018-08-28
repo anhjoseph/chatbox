@@ -21,7 +21,10 @@ class Chatbox extends Component {
     const socket = socketIOClient('http://localhost:3000');
     e.preventDefault();
     e.target.reset();
-    socket.emit('message', this.state.message);
+    socket.emit('message', {
+      text: this.state.message,
+      timeStamp: new Date().toLocaleString()
+    });
   }
 
   render() {

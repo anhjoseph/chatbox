@@ -64,7 +64,7 @@ class Chatroom extends Component {
     return (
       <div>
         <div>
-          CHATTERBOX
+          CHATROOM
         </div>
         <Channels channels={this.state.channels} />
         <Users users={this.state.users} />
