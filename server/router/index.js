@@ -15,6 +15,7 @@ router.route('/api/messages')
 
 router.route('/api/channels')
   .get(ChannelController.GET)
+  .post(ChannelController.POST)
 
 router.route('/api/users')
   .get(UserController.GET)

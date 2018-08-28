@@ -19,7 +19,7 @@ const User = db.define('User', {
   timestamps: false
 });
 
-const Channel = db.define('Room', {
+const Channel = db.define('Channel', {
   channelname: {
     type: Sequelize.STRING,
     allowNull: false
@@ -29,12 +29,17 @@ const Channel = db.define('Room', {
 });
 
 const Message = db.define('Message', {
-  message: {
+  text: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+
+  timestamp: {
     type: Sequelize.STRING,
     allowNull: false
   }
 }, {
-  updatedAt: false
+  timestamps: false
 });
 
 // Channel.hasMany(Message, { foreignKey: 'channel_id' });

@@ -23,7 +23,7 @@ class Chatbox extends Component {
     e.target.reset();
     socket.emit('message', {
       text: this.state.message,
-      timeStamp: new Date().toLocaleString()
+      timestamp: new Date().toLocaleString()
     });
   }
 

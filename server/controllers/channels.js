@@ -12,9 +12,19 @@ const ChannelController = {
     }).catch(err => {
       console.log('error fetching channels', err);
     })
+  },
+
+  POST: (req, res) => {
+    Channel.findOrCreate({ where: {
+      channelname: req.body.channelname 
+    }}).then(channel => {
+        res.status(201).send(channel);
+      }).catch(err => {
+        res.status(404).send(err);
+      })
   }
-}
+};
 
 module.exports = {
   ChannelController: ChannelController
-}
+};
