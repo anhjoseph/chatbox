@@ -4,9 +4,7 @@ import axios from 'axios';
 class Channels extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      channels: this.props.channels
-    };
+    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -34,11 +32,13 @@ class Channels extends React.Component {
           </form>
         </div>
         <div>
-          <select>
-            {this.state.channels.map((channel) => {
-              <option>{channel}</option>
-            })}
-          </select>
+          <form>
+            <select name='channels'>
+              {this.props.channels.map((channel) =>
+                <option key={channel} value={channel}>{channel}</option>
+              )}
+            </select>
+          </form>
         </div>
       </div>
     )
