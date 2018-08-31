@@ -11,7 +11,7 @@ const app = express();
 const port = 3000;
 const server = http.createServer(app);
 
-//initialize a new instance of socket.io by passing in http object
+// initialize a new instance of socket.io by passing in http object
 const io = require('socket.io')(server);
 
 require('../db/config');
@@ -19,29 +19,18 @@ require('../db/config');
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
-// app.use(session({  }))
+// app.use(session({  }));
 // app.use(passport.initialize());
 // app.use(passport.session());
 app.use('/', router);
 
 server.listen(port, () => {
   console.log(`server running at ${port}`);
-
-  //listen on the (native) connection event for incoming sockets
+  // listen on the (native) connection event for incoming sockets
   io.on('connection', (socket) => {
-    
-    socket.on('connect', () => {
-      
-    });
-
     socket.on('message', (msg) => {
       MessageController.POST(msg);
       io.emit('message', msg);
     });
-
-    socket.on('disconnect', () => {
-
-    });
-
   });
 });
