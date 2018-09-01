@@ -3,7 +3,7 @@ const { User } = require('../../db/models');
 const UserController = {
   GET: (req, res) => {
     User.findAll({
-
+      where: { status: true }
     }).then(data => {
       let users = [...data].map((user) => {
         return user.dataValues.username;

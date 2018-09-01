@@ -13,7 +13,7 @@ const User = db.define('User', {
   },
 
   status: {
-    type: Sequelize.STRING
+    type: Sequelize.BOOLEAN
   }
 }, {
   timestamps: false

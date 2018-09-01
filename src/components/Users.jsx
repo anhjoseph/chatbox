@@ -1,8 +1,10 @@
 import React from 'react';
 
-const Users = () => (
+const Users = (props) => (
   <div>
-    User
+    {props.users.map(user => 
+      <div key={user}>{user}</div>
+    )}
   </div>
 )
 

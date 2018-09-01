@@ -5,11 +5,16 @@ const Authenticate = {
     User.findOne({ where: {
       username: req.body.username
     }}).then(user => {
-      if (user.dataValues.password === req.body.password) {
-        res.status(200).send(user);
-      } else {
-        res.status(404).send();
-      }
+      user.update({ status: true }).then(updatedUser => {
+        console.log('UPDATED USER ====', updatedUser)
+        if (updatedUser.dataValues.password === req.body.password) {
+          res.status(200).send(updatedUser);
+        } else {
+          res.status(404).send();
+        }
+      }).catch(err => {
+        res.status(400).send(err);
+      })
     }).catch(err => {
       res.status(400).send(err);
     })

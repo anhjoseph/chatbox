@@ -1328,7 +1328,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Users = function Users() {\n  return _react2.default.createElement(\n    'div',\n    null,\n    'User'\n  );\n};\n\nexports.default = Users;\n\n//# sourceURL=webpack:///./src/components/users.jsx?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Users = function Users(props) {\n  return _react2.default.createElement(\n    'div',\n    null,\n    props.users.map(function (user) {\n      return _react2.default.createElement(\n        'div',\n        { key: user },\n        user\n      );\n    })\n  );\n};\n\nexports.default = Users;\n\n//# sourceURL=webpack:///./src/components/users.jsx?");
 
 /***/ }),
 
