@@ -27,6 +27,10 @@ server.listen(port, () => {
   console.log(`server running at ${port}`);
   // listen on the (native) connection event for incoming sockets
   io.on('connection', (socket) => {
+    socket.on('user', (username) => {
+      io.emit('user', username);
+    });
+
     socket.on('message', (msg) => {
       MessageController.POST(msg);
       io.emit('message', msg);

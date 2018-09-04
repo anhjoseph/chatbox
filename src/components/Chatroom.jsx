@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import socketIOClient from 'socket.io-client';
+import { listenMessage, listenUser } from '../services/socket';
 import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import Channels from './Channels.jsx';
@@ -10,12 +10,8 @@ class Chatroom extends Component {
   constructor() {
     super();
 
-    const socket = socketIOClient('http://localhost:3000');
-    socket.on('message', (msg) => {
-      this.setState({
-        messages: [...this.state.messages, msg]
-      });
-    });
+    listenMessage(this);
+    listenUser(this);
 
     this.state = {
       messages: [],

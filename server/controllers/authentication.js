@@ -7,7 +7,7 @@ const Authenticate = {
     }}).then(user => {
       user.update({ status: true }).then(updatedUser => {
         if (updatedUser.dataValues.password === req.body.password) {
-          res.status(200).send(updatedUser);
+          res.status(200).send(updatedUser.dataValues.username);
         } else {
           res.status(404).send();
         }

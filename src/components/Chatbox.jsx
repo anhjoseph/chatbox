@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import socketIOClient from 'socket.io-client';
+import { emitMessage } from '../services/socket';
 
 class Chatbox extends Component {
   constructor() {
@@ -18,13 +18,7 @@ class Chatbox extends Component {
   }
 
   handlePost(e) {
-    const socket = socketIOClient('http://localhost:3000');
-    e.preventDefault();
-    e.target.reset();
-    socket.emit('message', {
-      text: this.state.message,
-      timestamp: new Date().toLocaleString()
-    });
+    emitMessage(e, this.state.message);
   }
 
   render() {

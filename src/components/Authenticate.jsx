@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
+import { emitUser } from '../services/socket';
 
 class Authenticate extends Component {
   constructor(props) {
@@ -9,8 +10,7 @@ class Authenticate extends Component {
     this.state = {
       hasProfile: true,
       username: '',
-      password: '',
-      status: false
+      password: ''
     }
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -35,8 +35,9 @@ class Authenticate extends Component {
     axios.post('/auth/login', {
       username: this.state.username,
       password: this.state.password
-    }).then(user => {
-      if (user) {
+    }).then(({ data }) => {
+      if (data) {
+        emitUser(data);
         this.props.toggleStatus();
       }
     }).catch(err => {

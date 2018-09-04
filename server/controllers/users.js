@@ -6,7 +6,7 @@ const UserController = {
       where: { status: true }
     }).then(data => {
       let users = [...data].map((user) => {
-        return user.dataValues.username;
+        return { username: user.dataValues.username };
       });
       res.status(200).send(users);
     }).catch(err => {
