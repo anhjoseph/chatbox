@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt-nodejs');
 const { User } = require('../../db/models');
 
 const Authenticate = {
@@ -6,7 +7,7 @@ const Authenticate = {
       username: req.body.username
     }}).then(user => {
       user.update({ status: true }).then(updatedUser => {
-        if (updatedUser.dataValues.password === req.body.password) {
+        if (bcrypt.compareSync(req.body.password, updatedUser.dataValues.password)) {
           res.status(200).send(updatedUser.dataValues.username);
         } else {
           res.status(404).send();
@@ -21,9 +22,11 @@ const Authenticate = {
 
   signup: (req, res) => {
     User.findOrCreate({ where: {
-      username: req.body.username,
-      password: req.body.password
-    }, defaults: { status: false }}).then(user => {
+      username: req.body.username
+    }, defaults: {
+      password: bcrypt.hashSync(req.body.password),
+      status: false
+    }}).then(user => {
       if (user) {
         res.status(200).send(user);
       } else {
