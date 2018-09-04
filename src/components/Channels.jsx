@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { emitChannel } from '../services/socket';
 
-class Channels extends React.Component {
+class Channels extends Component {
   constructor(props) {
     super(props);
     this.state = {};
