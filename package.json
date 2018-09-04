@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anhjoseph/chatbox.git"
+    "url": "git+https://github.com/anhjoseph/real-time-chat.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/anhjoseph/chatbox/issues"
+    "url": "https://github.com/anhjoseph/real-time-chat/issues"
   },
-  "homepage": "https://github.com/anhjoseph/chatbox#readme",
+  "homepage": "https://github.com/anhjoseph/real-time-chat#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
