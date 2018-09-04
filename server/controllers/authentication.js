@@ -6,6 +6,7 @@ const Authenticate = {
     User.findOne({ where: {
       username: req.body.username
     }}).then(user => {
+      req.session.user = user.dataValues.username;
       user.update({ status: true }).then(updatedUser => {
         if (bcrypt.compareSync(req.body.password, updatedUser.dataValues.password)) {
           res.status(200).send(updatedUser.dataValues.username);
