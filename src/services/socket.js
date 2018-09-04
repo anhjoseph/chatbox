@@ -8,13 +8,13 @@ const emitUser = (username) => {
   });
 };
 
-const emitChannel = () => {
-
+const emitChannel = (channel) => {
+  socket.emit('channel', {
+    channel: channel
+  });
 };
 
-const emitMessage = (e, msg) => {
-  e.preventDefault();
-  e.target.reset();
+const emitMessage = (msg) => {
   socket.emit('message', {
     text: msg,
     timestamp: new Date().toLocaleString()
@@ -37,13 +37,19 @@ const listenMessage = (context) => {
   });
 };
 
-const listenChannel = () => {
-
+const listenChannel = (context) => {
+  socket.on('channel', (channel) => {
+    context.setState({
+      channels: [...context.state.channels, channel]
+    });
+  });
 };
 
 module.exports = {
   emitUser: emitUser,
+  emitChannel: emitChannel,
   emitMessage: emitMessage,
   listenUser: listenUser,
+  listenChannel: listenChannel,
   listenMessage: listenMessage
 };

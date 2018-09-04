@@ -6,7 +6,7 @@ const ChannelController = {
 
     }).then(data => {
       let channels = [...data].map((channel) => {
-        return channel.dataValues.channelname;
+        return { channel: channel.dataValues.channelname }
       });
       res.status(200).send(channels);
     }).catch(err => {

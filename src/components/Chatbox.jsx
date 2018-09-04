@@ -18,7 +18,9 @@ class Chatbox extends Component {
   }
 
   handlePost(e) {
-    emitMessage(e, this.state.message);
+    e.preventDefault();
+    e.target.reset();
+    emitMessage(this.state.message);
   }
 
   render() {

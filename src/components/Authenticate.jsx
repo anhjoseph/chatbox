@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { emitUser } from '../services/socket';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
-import { emitUser } from '../services/socket';
 
 class Authenticate extends Component {
   constructor(props) {

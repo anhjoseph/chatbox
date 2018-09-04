@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import { emitChannel } from '../services/socket';
 
 class Channels extends React.Component {
   constructor(props) {
@@ -11,15 +11,13 @@ class Channels extends React.Component {
 
   handleChange(e) {
     this.setState({
-      channelname: e.target.value
+      channelName: e.target.value
     })
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/api/channels', {
-      channelname: this.state.channelname
-    })
+    emitChannel(this.state.channelName);
   }
 
   render() {
@@ -34,7 +32,7 @@ class Channels extends React.Component {
         <div>
           <form>
             <select name='channels'>
-              {this.props.channels.map((channel) =>
+              {this.props.channels.map(({ channel }) =>
                 <option key={channel} value={channel}>{channel}</option>
               )}
             </select>

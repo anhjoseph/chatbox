@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { listenMessage, listenUser } from '../services/socket';
+import { listenUser, listenChannel, listenMessage } from '../services/socket';
 import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import Channels from './Channels.jsx';
@@ -10,29 +10,30 @@ class Chatroom extends Component {
   constructor() {
     super();
 
-    listenMessage(this);
     listenUser(this);
+    listenChannel(this);
+    listenMessage(this);
 
     this.state = {
-      messages: [],
+      users: [],
       channels: [],
-      users: []
+      messages: []
     };
   };
 
   componentDidMount() {
-    this.fetchMessages();
-    this.fetchChannels();
     this.fetchUsers();
+    this.fetchChannels();
+    this.fetchMessages();
   }
 
-  fetchMessages() {
-    axios.get('/api/messages').then(({ data }) => {
+  fetchUsers() {
+    axios.get('/api/users').then(({ data }) => {
       this.setState({
-        messages: data
+        users: data
       })
     }).catch(err => {
-      console.log('error fetching messages', err);
+      console.log('error fetching users', err);
     })
   }
 
@@ -46,24 +47,24 @@ class Chatroom extends Component {
     })
   }
 
-  fetchUsers() {
-    axios.get('/api/users').then(({ data }) => {
+  fetchMessages() {
+    axios.get('/api/messages').then(({ data }) => {
       this.setState({
-        users: data
+        messages: data
       })
     }).catch(err => {
-      console.log('error fetching users', err);
+      console.log('error fetching messages', err);
     })
   }
-  
+
   render() {
     return (
       <div>
         <div>
           CHATROOM
         </div>
-        <Channels channels={this.state.channels} />
         <Users users={this.state.users} />
+        <Channels channels={this.state.channels} />
         <Messages messages={this.state.messages} />
         <Chatbox />
       </div>
