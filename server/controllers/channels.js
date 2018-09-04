@@ -14,13 +14,13 @@ const ChannelController = {
     })
   },
 
-  POST: (req, res) => {
-    Channel.findOrCreate({ where: {
-      channelname: req.body.channelname 
-    }}).then(channel => {
-        res.status(201).send(channel);
+  POST: (channel) => {
+    console.log(channel);
+    Channel.create({ channelname: channel.channel })
+      .then(() => {
+        console.log('successfully created channel');
       }).catch(err => {
-        res.status(404).send(err);
+        console.log('error creating channel', err);
       })
   }
 };

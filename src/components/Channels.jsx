@@ -17,6 +17,7 @@ class Channels extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    e.target.reset();
     emitChannel(this.state.channelName);
   }
 
