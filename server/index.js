@@ -10,7 +10,6 @@ const { MessageController } = require('./controllers/messages');
 const app = express();
 const port = 3000;
 const server = http.createServer(app);
-
 // initialize a new instance of socket.io by passing in http object
 const io = require('socket.io')(server);
 

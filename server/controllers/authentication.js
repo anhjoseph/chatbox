@@ -6,7 +6,6 @@ const Authenticate = {
       username: req.body.username
     }}).then(user => {
       user.update({ status: true }).then(updatedUser => {
-        console.log('UPDATED USER ====', updatedUser)
         if (updatedUser.dataValues.password === req.body.password) {
           res.status(200).send(updatedUser);
         } else {
@@ -24,7 +23,7 @@ const Authenticate = {
     User.findOrCreate({ where: {
       username: req.body.username,
       password: req.body.password
-    }}).then(user => {
+    }, defaults: { status: false }}).then(user => {
       if (user) {
         res.status(200).send(user);
       } else {
