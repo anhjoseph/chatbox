@@ -9,9 +9,8 @@ const Authenticate = {
     }}).then(user => {
       user.update({ status: true }).then(updatedUser => {
         if (bcrypt.compareSync(req.body.password, updatedUser.dataValues.password)) {
-          let token = generateToken(updatedUser);
-          console.log('TOKEN ====', token);
-          res.status(200).send(token);
+          let token = generateToken(updatedUser.username);
+          res.status(200).send({ token: token });
         } else {
           res.status(404).send();
         }
