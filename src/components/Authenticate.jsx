@@ -35,9 +35,10 @@ class Authenticate extends Component {
     axios.post('/auth/login', {
       username: this.state.username,
       password: this.state.password
-    }).then(({ data }) => {
-      if (data) {
-        emitUser(data);
+    }).then(data => {
+      console.log('TOKEN ====', data.config.data);
+      if (token) {
+        emitUser();
         this.props.toggleStatus();
       }
     }).catch(err => {

@@ -1,15 +1,17 @@
 const bcrypt = require('bcrypt-nodejs');
 const { User } = require('../../db/models');
+const { generateToken } = require('../utils/generateToken');
 
 const Authenticate = {
   login: (req, res) => {
     User.findOne({ where: {
       username: req.body.username
     }}).then(user => {
-      // req.session.user = user.dataValues.username;
       user.update({ status: true }).then(updatedUser => {
         if (bcrypt.compareSync(req.body.password, updatedUser.dataValues.password)) {
-          res.status(200).send(updatedUser.dataValues.username);
+          let token = generateToken(updatedUser);
+          console.log('TOKEN ====', token);
+          res.status(200).send(token);
         } else {
           res.status(404).send();
         }
