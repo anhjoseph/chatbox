@@ -38,7 +38,7 @@ class Authenticate extends Component {
     }).then(({ data }) => {
       if (data.token) {
         localStorage.setItem('token', data.token);
-        emitUser(data.user);
+        emitUser(this.state.username);
         this.props.toggleStatus();
       }
     }).catch(err => {

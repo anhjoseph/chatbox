@@ -11,7 +11,7 @@ router.route('/auth/signup')
 router.route('/auth/login')
   .post(AuthenticationController.login);
 
-router.all('/api', authenticate.verifyToken);
+router.all('/api/*', authenticate.verifyToken);
 
 router.route('/api/users')
   .get(UserController.GET);

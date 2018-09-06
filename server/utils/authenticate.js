@@ -21,13 +21,7 @@ const authenticate = {
   },
 
   verify: (token) => {
-    jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
-      if (err) {
-        return false;
-      } else {
-        return true;
-      }
-    })
+    return jwt.verify(token, process.env.JWT_SECRET);
   }
 };
 

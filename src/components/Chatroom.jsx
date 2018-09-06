@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { listenUser, listenChannel, listenMessage } from '../services/socket';
 import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import Channels from './Channels.jsx';
 import Users from './users.jsx';
+import { listenUser, listenChannel, listenMessage } from '../services/socket';
 
 class Chatroom extends Component {
   constructor() {
     super();
-
-    listenUser(this);
-    listenChannel(this);
-    listenMessage(this);
 
     this.state = {
       users: [],
       channels: [],
       messages: []
     };
+
+    this.config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    };
+
+    listenUser(this);
+    listenChannel(this);
+    listenMessage(this);
+
+    this.fetchUsers = this.fetchUsers.bind(this);
+    this.fetchChannels = this.fetchChannels.bind(this);
+    this.fetchMessages = this.fetchMessages.bind(this);
   };
 
   componentDidMount() {
@@ -28,7 +38,7 @@ class Chatroom extends Component {
   }
 
   fetchUsers() {
-    axios.get('/api/users').then(({ data }) => {
+    axios.get('/api/users', this.config).then(({ data }) => {
       this.setState({
         users: data
       })
@@ -38,7 +48,7 @@ class Chatroom extends Component {
   }
 
   fetchChannels() {
-    axios.get('/api/channels').then(({ data }) => {
+    axios.get('/api/channels', this.config).then(({ data }) => {
       this.setState({
         channels: data
       })
@@ -48,7 +58,7 @@ class Chatroom extends Component {
   }
 
   fetchMessages() {
-    axios.get('/api/messages').then(({ data }) => {
+    axios.get('/api/messages', this.config).then(({ data }) => {
       this.setState({
         messages: data
       })
