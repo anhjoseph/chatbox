@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { emitChannel } from '../services/socket';
+import { emitChannel } from '../services/socketService';
 
 class Channels extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Channels extends Component {
         </div>
         <div>
           <form>
-            <select name='channels'>
+            <select name="channels">
               {this.props.channels.map(({ channel }) =>
                 <option key={channel} value={channel}>{channel}</option>
               )}

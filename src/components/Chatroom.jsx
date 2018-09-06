@@ -4,7 +4,8 @@ import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import Channels from './Channels.jsx';
 import Users from './users.jsx';
-import { listenUser, listenChannel, listenMessage } from '../services/socket';
+import authService from '../services/authenticateService';
+import socketService from '../services/socketService';
 
 class Chatroom extends Component {
   constructor() {
@@ -18,13 +19,13 @@ class Chatroom extends Component {
 
     this.config = {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
+        Authorization: 'Bearer ' + authService.getToken()
       }
     };
 
-    listenUser(this);
-    listenChannel(this);
-    listenMessage(this);
+    socketService.listenUser(this);
+    socketService.listenChannel(this);
+    socketService.listenMessage(this);
 
     this.fetchUsers = this.fetchUsers.bind(this);
     this.fetchChannels = this.fetchChannels.bind(this);

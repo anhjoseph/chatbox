@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { emitMessage } from '../services/socket';
+import { emitMessage } from '../services/socketService';
 
 class Chatbox extends Component {
   constructor() {
