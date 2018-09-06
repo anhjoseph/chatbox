@@ -22,6 +22,7 @@
     }],
     "react/no-did-update-set-state": "error",
     "react/no-unknown-property": "error",
-    "react/react-in-jsx-scope": "error"
+    "react/react-in-jsx-scope": "error",
+    "jsx-quotes": ["error", "prefer-double"]
   }
 }

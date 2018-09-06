@@ -1,25 +1,56 @@
-import React from 'react'; 
+import React, { Component } from 'react';
+import axios from 'axios';
+import { emitUser } from '../services/socket';
  
-const Login = (props) => (
-  <div>
-    <form onSubmit={props.handleLogin}>
-      <div>
-        <label>Username:</label>
-        <input type='text' name='username' onChange={props.handleChange} />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type='password' name='password' onChange={props.handleChange} />
-      </div>
-      <div>
-        <input type='submit' value='Log In' />
-      </div>
-    </form>
+class Login extends Component {
+  constructor() {
+    super();
+    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+  }
 
-    <button onClick={props.handleClick}>
-      Sign Up
-    </button>
-  </div>
-);
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleLogin(e) {
+    e.preventDefault();
+    axios.post('/auth/login', {
+      username: this.state.username,
+      password: this.state.password
+    }).then(({ data }) => {
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        emitUser(this.state.username);
+        // this.props.toggleStatus();
+      }
+    }).catch(err => {
+      console.log('error logging in', err);
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleLogin}>
+          <div>
+            <label>Username:</label>
+            <input type="text" name="username" onChange={this.handleChange} />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" name="password" onChange={this.handleChange} />
+          </div>
+          <div>
+            <input type="submit" value="Log In" />
+          </div>
+        </form>
+      </div>
+    )
+  }
+}
 
 export default Login;

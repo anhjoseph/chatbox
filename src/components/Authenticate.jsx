@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { emitUser } from '../services/socket';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 
@@ -12,38 +11,7 @@ class Authenticate extends Component {
       username: '',
       password: ''
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
-  }
-
-  handleClick() {
-    this.setState({
-      hasProfile: false
-    });
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleLogin(e) {
-    e.preventDefault();
-    axios.post('/auth/login', {
-      username: this.state.username,
-      password: this.state.password
-    }).then(({ data }) => {
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        emitUser(this.state.username);
-        this.props.toggleStatus();
-      }
-    }).catch(err => {
-      console.log('error logging in', err);
-    });
   }
 
   handleSignup(e) {
@@ -61,15 +29,11 @@ class Authenticate extends Component {
   }
 
   render() {
-    if (this.state.hasProfile) {
-      return (
-        <Login handleClick={this.handleClick} handleChange={this.handleChange} handleLogin={this.handleLogin} />
-      )
-    } else {
-      return (
-        <Signup handleChange={this.handleChange} handleSignup={this.handleSignup} />
-      )
-    }
+    return (
+      <div>
+        <Login />
+      </div>
+    )
   }
 };
 
