@@ -4,8 +4,8 @@ const path = require('path');
 const parser = require('body-parser');
 
 const { router } = require('./router');
-const { MessageController } = require('./controllers/messages');
 const { ChannelController } = require('./controllers/channels');
+const { MessageController } = require('./controllers/messages');
 
 const app = express();
 const port = 3000;

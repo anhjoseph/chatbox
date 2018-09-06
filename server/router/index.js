@@ -1,24 +1,27 @@
 const router = require('express').Router();
-const { Authenticate } = require('../controllers/authentication');
-const { MessageController } = require('../controllers/messages');
-const { ChannelController } = require('../controllers/channels');
+const { authenticate } = require('../utils/authenticate');
+const { AuthenticationController } = require('../controllers/authentication');
 const { UserController } = require('../controllers/users');
-
-router.route('/auth/login')
-  .post(Authenticate.login)
+const { ChannelController } = require('../controllers/channels');
+const { MessageController } = require('../controllers/messages');
 
 router.route('/auth/signup')
-  .post(Authenticate.signup)
+  .post(AuthenticationController.signup);
 
-router.route('/api/messages')
-  .get(MessageController.GET)
+router.route('/auth/login')
+  .post(AuthenticationController.login);
+
+router.all('/api', authenticate.verifyToken);
+
+router.route('/api/users')
+  .get(UserController.GET);
 
 router.route('/api/channels')
   .get(ChannelController.GET)
-  .post(ChannelController.POST)
+  .post(ChannelController.POST);
 
-router.route('/api/users')
-  .get(UserController.GET)
+router.route('/api/messages')
+  .get(MessageController.GET);
 
 module.exports = {
   router: router

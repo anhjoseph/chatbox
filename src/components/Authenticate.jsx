@@ -11,7 +11,7 @@ class Authenticate extends Component {
       hasProfile: true,
       username: '',
       password: ''
-    }
+    };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -21,13 +21,13 @@ class Authenticate extends Component {
   handleClick() {
     this.setState({
       hasProfile: false
-    })
+    });
   }
 
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
 
   handleLogin(e) {
@@ -36,14 +36,14 @@ class Authenticate extends Component {
       username: this.state.username,
       password: this.state.password
     }).then(({ data }) => {
-      console.log('TOKEN ====', data);
       if (data.token) {
-        emitUser();
+        localStorage.setItem('token', data.token);
+        emitUser(data.user);
         this.props.toggleStatus();
       }
     }).catch(err => {
       console.log('error logging in', err);
-    })
+    });
   }
 
   handleSignup(e) {
@@ -54,10 +54,10 @@ class Authenticate extends Component {
     }).then(() => {
       this.setState({
         hasProfile: true
-      })
+      });
     }).catch(err => {
       console.log('error signing up', err);
-    })
+    });
   }
 
   render() {

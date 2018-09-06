@@ -1,29 +1,30 @@
 const { Message } = require('../../db/models');
+const { authenticate } = require('../utils/authenticate');
 
 const MessageController = {
   GET: (req, res) => {
-    Message.findAll({
+    if (authenticate.verify(req.token)) {
+      Message.findAll({
       
-    }).then(data => {
-      let messages = [...data].map((message) => {
-        return {
-          text: message.dataValues.text,
-          timestamp: message.dataValues.timestamp
-        };
-      });
-      res.status(200).send(messages);
-    }).catch(err => {
-      console.log('error fetching messages', err);
-    })
+      }).then(data => {
+        let messages = [...data].map((message) => {
+          return {
+            text: message.dataValues.text,
+            timestamp: message.dataValues.timestamp
+          };
+        });
+        res.status(200).send(messages);
+      }).catch(err => {
+        res.status(404).send(err);
+      })
+    } else {
+      res.sendStatus(403);
+    }
   },
 
   POST: (msg) => {
-    Message.create({ text: msg.text, timestamp: msg.timestamp })
-      .then(() => {
-        console.log('successfully posted message');
-      }).catch(err => {
-        console.log('error posting message', err);
-      })
+    // verify token for socket
+    Message.create({ text: msg.text, timestamp: msg.timestamp });
   }
 };
 
