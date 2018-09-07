@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import socketService from '../services/socketService';
+import Authenticate from '../services/authenticateService';
+import Socket from '../services/socketService';
  
 class Login extends Component {
   constructor() {
@@ -23,8 +24,9 @@ class Login extends Component {
       password: this.state.password
     }).then(({ data }) => {
       if (data.token) {
-        localStorage.setItem('token', data.token);
-        socketService.emitUser(this.state.username);
+        Authenticate.setToken(data.token);
+        Socket.emitUser(this.state.username);
+        this.props.history.push('/');
       }
     }).catch(err => {
       console.log('error logging in', err);

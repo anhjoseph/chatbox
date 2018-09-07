@@ -1,6 +1,10 @@
 import decode from 'jwt-decode';
 
 const authService = {
+  setToken: function(token) {
+    localStorage.setItem('token', token);
+  },
+  
   getToken: function() {
     return localStorage.getItem('token');
   },
@@ -22,7 +26,7 @@ const authService = {
     }
   },
 
-  isLoggedIn: function() {
+  isAuthenticated: function() {
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token);
   }
