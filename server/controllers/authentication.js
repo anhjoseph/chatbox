@@ -7,16 +7,14 @@ const AuthenticationController = {
     User.findOne({ where: {
       username: req.body.username
     }}).then(user => {
-      user.update({ status: true }).then(updatedUser => {
-        if (bcrypt.compareSync(req.body.password, updatedUser.dataValues.password)) {
+      if (bcrypt.compareSync(req.body.password, user.dataValues.password)) {
+        user.update({ status: true }).then(updatedUser => {
           let token = authenticate.generateToken(updatedUser.username);
           res.status(200).send({ token: token });
-        } else {
-          res.sendStatus(404);
-        }
-      }).catch(err => {
-        res.status(400).send(err);
-      })
+        })
+      } else {
+        res.sendStatus(404);
+      }
     }).catch(err => {
       res.status(400).send(err);
     })

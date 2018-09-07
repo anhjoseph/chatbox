@@ -23,6 +23,7 @@ app.use('/', router);
 server.listen(port, () => {
   console.log(`server running at ${port}`);
   io.on('connection', (socket) => {
+    console.log('CONNECTIONS ====', Object.keys(io.sockets.sockets));
 
     socket.on('user', (username) => {
       io.emit('user', username);
