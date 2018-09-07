@@ -9,6 +9,7 @@ const MessageController = {
       }).then(data => {
         let messages = [...data].map((message) => {
           return {
+            username: message.dataValues.username,
             text: message.dataValues.text,
             timestamp: message.dataValues.timestamp
           };
@@ -24,7 +25,7 @@ const MessageController = {
 
   POST: (msg) => {
     // verify token for socket
-    Message.create({ text: msg.text, timestamp: msg.timestamp });
+    Message.create({ username: msg.username, text: msg.text, timestamp: msg.timestamp });
   }
 };
 

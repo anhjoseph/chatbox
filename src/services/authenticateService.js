@@ -4,13 +4,18 @@ const authService = {
   setToken: function(token) {
     localStorage.setItem('token', token);
   },
-  
+
+  removeToken: function() {
+    localStorage.removeItem('token');
+  },
+
   getToken: function() {
     return localStorage.getItem('token');
   },
 
-  removeToken: function() {
-    localStorage.removeItem('token');
+  getUser: function() {
+    const payload = decode(this.getToken());
+    return payload.username;
   },
 
   isTokenExpired: function(token) {

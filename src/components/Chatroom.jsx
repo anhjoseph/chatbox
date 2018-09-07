@@ -71,7 +71,7 @@ class Chatroom extends Component {
 
   handleLogout() {
     Authenticate.removeToken();
-    this.props.history.push('/');
+    this.props.history.push('/login');
   }
 
   render() {

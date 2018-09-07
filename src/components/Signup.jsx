@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Authenticate from '../services/authenticateService';
 
 class Signup extends Component {
   constructor() {
@@ -21,16 +23,16 @@ class Signup extends Component {
       username: this.state.username,
       password: this.state.password
     }).then(() => {
-      this.setState({
-        hasProfile: true
-      });
+      this.props.history.push('/login');
     }).catch(err => {
       console.log('error signing up', err);
     });
   }
 
   render() {
-    return (
+    return Authenticate.isAuthenticated() ? (
+      <Redirect to="/" />
+    ) : (
       <div>
         <form onSubmit={this.handleSignup}>
           <div>

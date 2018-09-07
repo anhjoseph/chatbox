@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute.jsx';
 import Chatroom from './Chatroom.jsx';
 import Login from './Login.jsx';
+import Signup from './Signup.jsx';
 
 class App extends Component {
   constructor() {
@@ -14,6 +15,7 @@ class App extends Component {
     return (
       <div>
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
         <PrivateRoute exact path="/" component={Chatroom} />
       </div>
     )

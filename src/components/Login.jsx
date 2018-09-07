@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import Authenticate from '../services/authenticateService';
 import Socket from '../services/socketService';
  
@@ -9,6 +10,7 @@ class Login extends Component {
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(e) {
@@ -33,8 +35,14 @@ class Login extends Component {
     });
   }
 
+  handleClick() {
+    this.props.history.push('/signup');
+  }
+
   render() {
-    return (
+    return Authenticate.isAuthenticated() ? (
+      <Redirect to="/" />
+    ) : (
       <div>
         <form onSubmit={this.handleLogin}>
           <div>
@@ -49,6 +57,10 @@ class Login extends Component {
             <input type="submit" value="Log In" />
           </div>
         </form>
+
+        <div>
+          <button onClick={this.handleClick}>Sign Up</button>
+        </div>
       </div>
     )
   }

@@ -14,9 +14,10 @@ const socketService = {
     });
   },
   
-  emitMessage: function(msg) {
+  emitMessage: function(msgObj) {
     socket.emit('message', {
-      text: msg,
+      username: msgObj.username,
+      text: msgObj.text,
       timestamp: new Date().toLocaleString()
     });
   },
