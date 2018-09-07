@@ -3,7 +3,7 @@ const socket = socketIOClient('http://localhost:3000');
 
 const socketService = {
   emitUser: function(username) {
-    socket.emit('user', {
+    socket.emit('user connected', {
       username: username
     });
   },
@@ -23,7 +23,7 @@ const socketService = {
   },
   
   listenUser: function(context) {
-    socket.on('user', (user) => {
+    socket.on('user connected', (user) => {
       context.setState({
         users: [...context.state.users, user]
       });
