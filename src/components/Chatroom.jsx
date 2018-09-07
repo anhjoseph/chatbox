@@ -4,8 +4,8 @@ import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import Channels from './Channels.jsx';
 import Users from './users.jsx';
-import authService from '../services/authenticateService';
-import socketService from '../services/socketService';
+import Authenticate from '../services/authenticateService';
+import Socket from '../services/socketService';
 
 class Chatroom extends Component {
   constructor() {
@@ -19,17 +19,18 @@ class Chatroom extends Component {
 
     this.config = {
       headers: {
-        Authorization: 'Bearer ' + authService.getToken()
+        Authorization: 'Bearer ' + Authenticate.getToken()
       }
     };
 
-    socketService.listenUser(this);
-    socketService.listenChannel(this);
-    socketService.listenMessage(this);
+    Socket.listenUser(this);
+    Socket.listenChannel(this);
+    Socket.listenMessage(this);
 
     this.fetchUsers = this.fetchUsers.bind(this);
     this.fetchChannels = this.fetchChannels.bind(this);
     this.fetchMessages = this.fetchMessages.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   };
 
   componentDidMount() {
@@ -68,11 +69,19 @@ class Chatroom extends Component {
     })
   }
 
+  handleLogout() {
+    Authenticate.removeToken();
+    
+  }
+
   render() {
     return (
       <div>
         <div>
           CHATROOM
+        </div>
+        <div>
+          <button onClick={this.handleLogout}>Logout</button>
         </div>
         <Users users={this.state.users} />
         <Channels channels={this.state.channels} />

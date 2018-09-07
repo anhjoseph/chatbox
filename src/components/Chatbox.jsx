@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { emitMessage } from '../services/socketService';
+import socketService from '../services/socketService';
 
 class Chatbox extends Component {
   constructor() {
@@ -20,7 +20,7 @@ class Chatbox extends Component {
   handlePost(e) {
     e.preventDefault();
     e.target.reset();
-    emitMessage(this.state.message);
+    socketService.emitMessage(this.state.message);
   }
 
   render() {

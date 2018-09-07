@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { emitChannel } from '../services/socketService';
+import socketService from '../services/socketService';
 
 class Channels extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Channels extends Component {
   handleSubmit(e) {
     e.preventDefault();
     e.target.reset();
-    emitChannel(this.state.channelName);
+    socketService.emitChannel(this.state.channelName);
   }
 
   render() {
