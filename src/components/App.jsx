@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute.jsx';
 import Chatroom from './Chatroom.jsx';
-import Authenticate from './Authenticate.jsx';
+import Login from './Login.jsx';
+import Signup from './Signup.jsx';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      isLoggedIn: false
-    };
-    this.toggleStatus = this.toggleStatus.bind(this);
+    this.state = {};
   }
 
-  toggleStatus() {
-    this.setState({
-      isLoggedIn: true
-    })
-  }
-  
   render() {
-    if (this.state.isLoggedIn) {
-      return <Chatroom />;
-    } else {
-      return <Authenticate toggleStatus={this.toggleStatus} />;
-    }
+    return (
+      <div>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <PrivateRoute exact path="/" component={Chatroom} />
+      </div>
+    )
   }
 };
 

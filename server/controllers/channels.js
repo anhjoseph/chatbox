@@ -19,9 +19,15 @@ const ChannelController = {
     }
   },
 
-  POST: (channel) => {
+  POST: (channel, io) => {
     // verify token for socket
-    Channel.create({ channelname: channel.channel });
+    Channel.findOrCreate({ where: {
+      channelname: channel.channel
+    }}).spread((instance, created) => {
+      if (created) {
+        io.emit('channel', channel);
+      }
+    })
   }
 };
 

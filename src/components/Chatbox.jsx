@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { emitMessage } from '../services/socket';
+import Socket from '../services/socketService';
+import Authenticate from '../services/authenticateService';
 
 class Chatbox extends Component {
   constructor() {
@@ -20,7 +21,10 @@ class Chatbox extends Component {
   handlePost(e) {
     e.preventDefault();
     e.target.reset();
-    emitMessage(this.state.message);
+    Socket.emitMessage({
+      username: Authenticate.getUser(),
+      text: this.state.message
+    });
   }
 
   render() {

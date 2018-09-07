@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const path = require('path');
 const { authenticate } = require('../utils/authenticate');
 const { AuthenticationController } = require('../controllers/authentication');
 const { UserController } = require('../controllers/users');
@@ -22,6 +23,15 @@ router.route('/api/channels')
 
 router.route('/api/messages')
   .get(MessageController.GET);
+
+router.route('/*')
+  .get((req, res) => {
+    res.sendFile(path.join(__dirname, '../../public/index.html'), (err) => {
+      if (err) {
+        res.status(500).send(err)
+      }
+    })
+  });
 
 module.exports = {
   router: router

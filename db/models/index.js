@@ -30,6 +30,11 @@ const Channel = db.define('Channel', {
 });
 
 const Message = db.define('Message', {
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+
   text: {
     type: Sequelize.STRING,
     allowNull: false

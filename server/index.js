@@ -29,8 +29,7 @@ server.listen(port, () => {
     });
 
     socket.on('channel', (channel) => {
-      io.emit('channel', channel);
-      ChannelController.POST(channel);
+      ChannelController.POST(channel, io);
     });
 
     socket.on('message', (msg) => {
