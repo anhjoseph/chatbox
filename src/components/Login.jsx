@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Authenticate from '../services/authenticateService';
-import Socket from '../services/socketService';
+import socket from '../services/socketService';
  
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -27,7 +27,8 @@ class Login extends Component {
     }).then(({ data }) => {
       if (data.token) {
         Authenticate.setToken(data.token);
-        Socket.emitUser(this.state.username);
+        let user = Authenticate.getUser();
+        socket.emitUserConnect(user);
         this.props.history.push('/');
       }
     }).catch(err => {

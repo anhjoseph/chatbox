@@ -24,10 +24,13 @@ server.listen(port, () => {
   console.log(`server running at ${port}`);
 
   io.on('connection', (socket) => {
-    console.log('CONNECTIONS ====', Object.keys(io.sockets.sockets));
 
     socket.on('user connected', (user) => {
-      io.emit('user connected', user);
+      socket.broadcast.emit('user connected', user);
+    });
+
+    socket.on('user disconnected', (user) => {
+      socket.broadcast.emit('user disconnected', user);
     });
 
     socket.on('channel', (channel) => {
@@ -38,10 +41,6 @@ server.listen(port, () => {
       io.emit('message', msg);
       MessageController.POST(msg);
     });
-
-    socket.on('user disconnected', (user) => {
-      io.emit('user disconnected', user);
-    });
-
+    
   });
 });

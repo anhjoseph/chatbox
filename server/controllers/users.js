@@ -7,9 +7,10 @@ const UserController = {
       User.findAll({
         where: { status: true }
       }).then(data => {
-        let users = [...data].map((user) => {
-          return { username: user.dataValues.username };
+        let users = [...data].map(user => {
+          return user.dataValues.username
         });
+        console.log(users);
         res.status(200).send(users);
       }).catch(err => {
         res.status(404).send(err);
