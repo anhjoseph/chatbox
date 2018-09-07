@@ -35,6 +35,8 @@ class Chatroom extends Component {
   };
 
   componentDidMount() {
+    let user = Authenticate.getUser();
+    socket.emitUserConnect(user);
     this.fetchUsers();
     this.fetchChannels();
     this.fetchMessages();

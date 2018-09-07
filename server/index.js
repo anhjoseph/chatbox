@@ -26,11 +26,16 @@ server.listen(port, () => {
   io.on('connection', (socket) => {
 
     socket.on('user connected', (user) => {
+      socket.username = user;
       socket.broadcast.emit('user connected', user);
     });
 
     socket.on('user disconnected', (user) => {
       socket.broadcast.emit('user disconnected', user);
+    });
+
+    socket.on('disconnect', () => {
+      socket.broadcast.emit('user disconnected', socket.username);
     });
 
     socket.on('channel', (channel) => {
@@ -41,6 +46,6 @@ server.listen(port, () => {
       io.emit('message', msg);
       MessageController.POST(msg);
     });
-    
+
   });
 });

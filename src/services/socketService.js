@@ -26,20 +26,25 @@ const socketService = {
   
   listenUserConnect: function(context) {
     socket.on('user connected', (user) => {
-      context.setState({
-        users: [...context.state.users, user]
-      });
+      const index = context.state.users.indexOf(user);
+      if (index === -1) {
+        context.setState({
+          users: [...context.state.users, user]
+        });
+      }
     })
   },
 
   listenUserDisconnect: function(context) {
     socket.on('user disconnected', (user) => {
       let users = [...context.state.users];
-      const index = [users.indexOf(user)];
-      users.splice(index, 1);
-      context.setState({
-        users: users
-      });
+      const index = users.indexOf(user);
+      if (index !== -1) {
+        users.splice(index, 1);
+        context.setState({
+          users: users
+        });
+      }
     })
   },
   
