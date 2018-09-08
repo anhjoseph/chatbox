@@ -4,8 +4,8 @@ import axios from 'axios';
 import Authenticate from '../services/authenticateService';
 
 class Signup extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleSignup = this.handleSignup.bind(this);

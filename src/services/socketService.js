@@ -2,10 +2,12 @@ import socketIOClient from 'socket.io-client';
 const socket = socketIOClient('http://localhost:3000');
 
 const socketService = {
-  emitUser: function(username) {
-    socket.emit('user connected', {
-      username: username
-    });
+  emitUserConnect: function(username) {
+    socket.emit('user connected', username);
+  },
+
+  emitUserDisconnect: function(username) {
+    socket.emit('user disconnected', username)
   },
   
   emitChannel: function(channel) {
@@ -22,11 +24,27 @@ const socketService = {
     });
   },
   
-  listenUser: function(context) {
+  listenUserConnect: function(context) {
     socket.on('user connected', (user) => {
-      context.setState({
-        users: [...context.state.users, user]
-      });
+      const index = context.state.users.indexOf(user);
+      if (index === -1) {
+        context.setState({
+          users: [...context.state.users, user]
+        });
+      }
+    })
+  },
+
+  listenUserDisconnect: function(context) {
+    socket.on('user disconnected', (user) => {
+      let users = [...context.state.users];
+      const index = users.indexOf(user);
+      if (index !== -1) {
+        users.splice(index, 1);
+        context.setState({
+          users: users
+        });
+      }
     })
   },
   

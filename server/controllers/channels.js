@@ -19,7 +19,7 @@ const ChannelController = {
     }
   },
 
-  POST: (channel, io) => {
+  save: (io, channel) => {
     // verify token for socket
     Channel.findOrCreate({ where: {
       channelname: channel.channel

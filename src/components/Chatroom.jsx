@@ -5,13 +5,14 @@ import Chatbox from './Chatbox.jsx';
 import Channels from './Channels.jsx';
 import Users from './users.jsx';
 import Authenticate from '../services/authenticateService';
-import Socket from '../services/socketService';
+import socket from '../services/socketService';
 
 class Chatroom extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      user: Authenticate.getUser(),
       users: [],
       channels: [],
       messages: []
@@ -23,9 +24,10 @@ class Chatroom extends Component {
       }
     };
 
-    Socket.listenUser(this);
-    Socket.listenChannel(this);
-    Socket.listenMessage(this);
+    socket.listenUserConnect(this);
+    socket.listenUserDisconnect(this);
+    socket.listenChannel(this);
+    socket.listenMessage(this);
 
     this.fetchUsers = this.fetchUsers.bind(this);
     this.fetchChannels = this.fetchChannels.bind(this);
@@ -34,9 +36,14 @@ class Chatroom extends Component {
   };
 
   componentDidMount() {
+    socket.emitUserConnect(this.state.user);
     this.fetchUsers();
     this.fetchChannels();
     this.fetchMessages();
+  }
+
+  componentWillUnmount() {
+    socket.emitUserDisconnect(this.state.user);
   }
 
   fetchUsers() {
@@ -70,6 +77,7 @@ class Chatroom extends Component {
   }
 
   handleLogout() {
+    socket.emitUserDisconnect(this.state.user);
     Authenticate.removeToken();
     this.props.history.push('/login');
   }

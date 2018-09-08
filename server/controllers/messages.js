@@ -23,9 +23,15 @@ const MessageController = {
     }
   },
 
-  POST: (msg) => {
+  save: (io, msg) => {
     // verify token for socket
-    Message.create({ username: msg.username, text: msg.text, timestamp: msg.timestamp });
+    Message.create({
+      username: msg.username,
+      text: msg.text,
+      timestamp: msg.timestamp
+    }).then(() => {
+      io.emit('message', msg)
+    });
   }
 };
 
