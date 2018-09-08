@@ -1,0 +1,18 @@
+.chatbox {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.form {
+  display: flex;
+  width: 100%;
+  margin: auto;
+}
+
+.input {
+  flex-grow: 1;
+}
+
+.button {
+  width: 60px;
+}

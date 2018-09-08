@@ -30,10 +30,10 @@ class Chatbox extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handlePost}>
-          <input onChange={this.handleChange} />
-          <button>Send</button>
+      <div className={styles.chatbox}>
+        <form className={styles.form} onSubmit={this.handlePost}>
+          <input className={styles.input} onChange={this.handleChange} />
+          <button className={styles.button}>Send</button>
         </form>
       </div>
     )

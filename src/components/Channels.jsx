@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import socket from '../services/socketService';
+import styles from './Channels.css';
 
 class Channels extends Component {
   constructor(props) {
@@ -24,20 +25,16 @@ class Channels extends Component {
   render() {
     return (
       <div>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleChange} />
+        <form className={styles.form} onSubmit={this.handleSubmit}>
+          <input onChange={this.handleChange} />
+          <div>
             <button>Create Channel</button>
-          </form>
-        </div>
+          </div>
+        </form>
         <div>
-          <form>
-            <select name="channels">
-              {this.props.channels.map(({ channel }) =>
-                <option key={channel} value={channel}>{channel}</option>
-              )}
-            </select>
-          </form>
+          {this.props.channels.map(({ channel }) =>
+            <div key={channel} value={channel}>{channel}</div>
+          )}
         </div>
       </div>
     )

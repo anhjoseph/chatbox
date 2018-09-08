@@ -85,17 +85,23 @@ class Chatroom extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.chatroom}>
         <div>
-          CHATROOM
+          <span className={styles.title}>
+            CHATROOM
+          </span>
+          <span className={styles.logout}>
+            <button onClick={this.handleLogout}>Log Out</button>
+          </span>
         </div>
-        <div>
-          <button onClick={this.handleLogout}>Logout</button>
+        <div className={styles.main}>
+          <Channels channels={this.state.channels} />
+          <div className={styles.center}>
+            <Messages messages={this.state.messages} />
+            <Chatbox />
+          </div>
+          <Users users={this.state.users} />
         </div>
-        <Users users={this.state.users} />
-        <Channels channels={this.state.channels} />
-        <Messages messages={this.state.messages} />
-        <Chatbox />
       </div>
     )
   }
