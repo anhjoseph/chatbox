@@ -1,0 +1,14 @@
+.heading {
+  padding-bottom: 3px;
+}
+
+.username {
+  font-size: 13pt;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.time {
+  font-size: 10pt;
+  color: grey;
+}

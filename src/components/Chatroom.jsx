@@ -6,6 +6,7 @@ import Channels from './Channels.jsx';
 import Users from './users.jsx';
 import Authenticate from '../services/authenticateService';
 import socket from '../services/socketService';
+import styles from './Chatroom.css';
 
 class Chatroom extends Component {
   constructor(props) {

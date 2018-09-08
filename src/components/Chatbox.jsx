@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import socket from '../services/socketService';
 import Authenticate from '../services/authenticateService';
+import styles from './Chatbox.css';
 
 class Chatbox extends Component {
   constructor() {

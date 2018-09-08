@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './Users.css';
 
 const Users = (props) => (
-  <div>
+  <div className={styles.users}>
     {props.users.map(user => 
       <div key={user}>{user}</div>
     )}

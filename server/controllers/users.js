@@ -25,7 +25,6 @@ const UserController = {
     }}).then(user => {
       if (user) {
         user.update({ status: true }).then(() => {
-          console.log(username);
           io.emit('user connected', username);
         })
       }
