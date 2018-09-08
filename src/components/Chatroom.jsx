@@ -12,6 +12,7 @@ class Chatroom extends Component {
     super(props);
 
     this.state = {
+      user: Authenticate.getUser(),
       users: [],
       channels: [],
       messages: []
@@ -35,11 +36,14 @@ class Chatroom extends Component {
   };
 
   componentDidMount() {
-    let user = Authenticate.getUser();
-    socket.emitUserConnect(user);
+    socket.emitUserConnect(this.state.user);
     this.fetchUsers();
     this.fetchChannels();
     this.fetchMessages();
+  }
+
+  componentWillUnmount() {
+    socket.emitUserDisconnect(this.state.user);
   }
 
   fetchUsers() {
@@ -73,7 +77,7 @@ class Chatroom extends Component {
   }
 
   handleLogout() {
-    socket.emitUserDisconnect(Authenticate.getUser());
+    socket.emitUserDisconnect(this.state.user);
     Authenticate.removeToken();
     this.props.history.push('/login');
   }

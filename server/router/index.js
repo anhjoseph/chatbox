@@ -19,7 +19,6 @@ router.route('/api/users')
 
 router.route('/api/channels')
   .get(ChannelController.GET)
-  .post(ChannelController.POST);
 
 router.route('/api/messages')
   .get(MessageController.GET);

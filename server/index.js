@@ -4,6 +4,7 @@ const path = require('path');
 const parser = require('body-parser');
 
 const { router } = require('./router');
+const { UserController } = require('./controllers/users');
 const { ChannelController } = require('./controllers/channels');
 const { MessageController } = require('./controllers/messages');
 
@@ -25,27 +26,19 @@ server.listen(port, () => {
 
   io.on('connection', (socket) => {
 
-    socket.on('user connected', (user) => {
+    socket.on('user connected', user => {
       socket.username = user;
-      socket.broadcast.emit('user connected', user);
+      UserController.connect(io, socket.username);
     });
 
-    socket.on('user disconnected', (user) => {
-      socket.broadcast.emit('user disconnected', user);
-    });
+    socket.on('user disconnected', user => UserController.disconnect(socket, user));
 
-    socket.on('disconnect', () => {
-      socket.broadcast.emit('user disconnected', socket.username);
-    });
+    socket.on('disconnect', () => UserController.disconnect(socket, socket.username));
 
-    socket.on('channel', (channel) => {
-      ChannelController.POST(channel, io);
-    });
-
-    socket.on('message', (msg) => {
-      io.emit('message', msg);
-      MessageController.POST(msg);
-    });
+    socket.on('channel', channel => ChannelController.save(io, channel));
+    
+    socket.on('message', msg => MessageController.save(io, msg));
 
   });
+
 });
