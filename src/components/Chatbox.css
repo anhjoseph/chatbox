@@ -13,11 +13,12 @@
   padding: 0 5px 0 5px;
   outline: none;
   flex-grow: 1;
-  line-height: 30px;
+  line-height: 36px;
   font-size: 16px;
 }
 
 .input::placeholder {
+  font-family: 'Karla', sans-serif;
   color: rgba(87, 82, 82, 0.877);
 }
 

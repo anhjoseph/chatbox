@@ -2,8 +2,20 @@
   margin-right: 15px;
   grid-area: users;
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .users:hover {
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.header {
+  padding: 8px 0;
+  font-size: 18px;
+}
+
+.user {
+  padding-bottom: 5px;
 }

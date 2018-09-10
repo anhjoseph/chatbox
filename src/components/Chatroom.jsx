@@ -90,7 +90,7 @@ class Chatroom extends Component {
           CHATROOM
         </div>
         <div className={styles.logout}>
-          <button onClick={this.handleLogout}>Log Out</button>
+          <button className={styles.button} onClick={this.handleLogout}>Log Out</button>
         </div>
         <Channels channels={this.state.channels} />
         <Messages messages={this.state.messages} />

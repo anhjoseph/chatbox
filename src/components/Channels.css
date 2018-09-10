@@ -1,5 +1,5 @@
 .channels {
-  padding-top: 45px;
+  padding-top: 55px;
   padding-bottom: 25px;
   grid-area: channels;
   background-color: #328cc1;
@@ -23,6 +23,7 @@
 }
 
 .input::placeholder {
+  font-family: 'Karla', sans-serif;
   color: rgba(255, 255, 255, 0.877);
 }
 
@@ -32,7 +33,6 @@
   border-radius: 5px;
   height: 28px;
   font-size: 15px;
-  font-weight: bold;
   color: white;
   background: #0b3c5d;
 }
@@ -41,6 +41,7 @@
   border: 2px solid #0b3c5d;
   color: white;
   background: #0b3c5d;
+  cursor: pointer;
 }
 
 .list {
@@ -60,4 +61,5 @@
 
 .channel:hover {
   background-color: #0b3c5d;
+  cursor: pointer;
 }
