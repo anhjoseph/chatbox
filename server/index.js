@@ -9,7 +9,7 @@ const { ChannelController } = require('./controllers/channels');
 const { MessageController } = require('./controllers/messages');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
