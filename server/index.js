@@ -27,6 +27,8 @@ server.listen(port, () => {
   io.on('connection', (socket) => {
 
     socket.on('user connected', user => {
+      socket.join('default');
+      socket.channel = 'default';
       socket.username = user;
       UserController.connect(io, socket.username);
     });
@@ -40,9 +42,7 @@ server.listen(port, () => {
     socket.on('message', msg => MessageController.save(io, msg));
 
     socket.on('join', channel => {
-      if (socket.channel) {
-        socket.leave(socket.channel);
-      }
+      socket.leave(socket.channel);
       socket.channel = channel;
       socket.join(channel);
     });

@@ -42,7 +42,7 @@ class Chatroom extends Component {
     socket.emitUserConnect(this.state.user);
     this.fetchUsers();
     this.fetchChannels();
-    this.handleClick('default');
+    this.fetchMessages('default');
   }
 
   componentWillUnmount() {
