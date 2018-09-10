@@ -1,0 +1,27 @@
+.chatbox {
+  grid-area: chatbox;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+}
+
+.input {
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 0 5px 0 5px;
+  outline: none;
+  flex-grow: 1;
+  line-height: 36px;
+  font-size: 16px;
+}
+
+.input::placeholder {
+  font-family: 'Karla', sans-serif;
+  color: rgba(87, 82, 82, 0.877);
+}
+
+.button {
+  width: 60px;
+}

@@ -1,0 +1,10 @@
+.messages {
+  border-top: 1px solid black;
+  padding-top: 8px;
+  grid-area: messages;
+  overflow-y: hidden;
+}
+
+.messages:hover {
+  overflow-y: scroll;
+}

@@ -6,6 +6,7 @@ import Channels from './Channels.jsx';
 import Users from './users.jsx';
 import Authenticate from '../services/authenticateService';
 import socket from '../services/socketService';
+import styles from './Chatroom.css';
 
 class Chatroom extends Component {
   constructor(props) {
@@ -84,16 +85,16 @@ class Chatroom extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className={styles.chatroom}>
+        <div className={styles.title}>
           CHATROOM
         </div>
-        <div>
-          <button onClick={this.handleLogout}>Logout</button>
+        <div className={styles.logout}>
+          <button className={styles.button} onClick={this.handleLogout}>Log Out</button>
         </div>
-        <Users users={this.state.users} />
         <Channels channels={this.state.channels} />
         <Messages messages={this.state.messages} />
+        <Users users={this.state.users} />
         <Chatbox />
       </div>
     )

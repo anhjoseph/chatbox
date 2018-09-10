@@ -1,12 +1,13 @@
 import React from 'react';
 import Message from './Message.jsx';
+import styles from './Messages.css';
 
 const Messages = (props) => (
-  <div>
+  <main className={styles.messages}>
     {props.messages.map((message, i) => 
       <Message message={message} key={i} />
     )}
-  </div>
+  </main>
 )
 
 export default Messages;

@@ -1,0 +1,65 @@
+.channels {
+  padding-top: 55px;
+  padding-bottom: 25px;
+  grid-area: channels;
+  background-color: #328cc1;
+}
+
+.form {
+  padding: 0 15px 0 13px;
+}
+
+.input {
+  margin-bottom: 6px;
+  border: 1px #0b3c5d solid;
+  border-radius: 3px;
+  padding: 0 8px 0 8px;
+  outline: none;
+  width: 90%;
+  line-height: 30px;
+  font-size: 16px;
+  color: white;
+  background-color: #0b3c5d;
+}
+
+.input::placeholder {
+  font-family: 'Karla', sans-serif;
+  color: rgba(255, 255, 255, 0.877);
+}
+
+.button {
+  margin-bottom: 13px;
+  border: 2px solid #0b3c5d;
+  border-radius: 5px;
+  height: 28px;
+  font-size: 15px;
+  color: white;
+  background: #0b3c5d;
+}
+
+.button:hover {
+  border: 2px solid #0b3c5d;
+  color: white;
+  background: #0b3c5d;
+  cursor: pointer;
+}
+
+.list {
+  height: 87%;
+  overflow-y: hidden;
+}
+
+.list:hover {
+  overflow-y: scroll;
+}
+
+.channel {
+  padding: 0 16px 3px 15px;
+  font-size: 13pt;
+  color: white;
+}
+
+.channel:hover {
+  background-color: #0b3c5d;
+  cursor: pointer;
+}
