@@ -102,7 +102,7 @@ class Chatroom extends Component {
     return (
       <div className={styles.chatroom}>
         <div className={styles.title}>
-          CHATROOM
+          {this.state.channel}
         </div>
         <div className={styles.logout}>
           <button className={styles.button} onClick={this.handleLogout}>Log Out</button>
