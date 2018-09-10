@@ -7,29 +7,35 @@ const socketService = {
   },
 
   emitUserDisconnect: function(username) {
-    socket.emit('user disconnected', username)
+    socket.emit('user disconnected', username);
   },
   
   emitChannel: function(channel) {
-    socket.emit('channel', {
-      channel: channel
-    });
+    socket.emit('channel', channel);
   },
   
-  emitMessage: function(msgObj) {
+  emitMessage: function(channel, msgObj) {
     socket.emit('message', {
+      channel: channel,
       username: msgObj.username,
       text: msgObj.text,
       timestamp: new Date().toLocaleString()
     });
   },
-  
+
+  joinChannel: function(context, channel) {
+    context.setState({
+      channel: channel
+    });
+    socket.emit('join', channel);
+  },
+
   listenUserConnect: function(context) {
     socket.on('user connected', (user) => {
       const index = context.state.users.indexOf(user);
       if (index === -1) {
         context.setState({
-          users: [...context.state.users, user]
+          users: [...context.state.users, user].sort()
         });
       }
     })
@@ -59,7 +65,7 @@ const socketService = {
   listenChannel: function(context) {
     socket.on('channel', (channel) => {
       context.setState({
-        channels: [...context.state.channels, channel]
+        channels: [...context.state.channels, channel].sort()
       });
     });
   }

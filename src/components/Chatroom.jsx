@@ -13,9 +13,10 @@ class Chatroom extends Component {
     super(props);
 
     this.state = {
-      user: Authenticate.getUser(),
       users: [],
-      channels: [],
+      user: Authenticate.getUser(),
+      channels: ['default'],
+      channel: 'default',
       messages: []
     };
 
@@ -33,6 +34,7 @@ class Chatroom extends Component {
     this.fetchUsers = this.fetchUsers.bind(this);
     this.fetchChannels = this.fetchChannels.bind(this);
     this.fetchMessages = this.fetchMessages.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   };
 
@@ -40,7 +42,7 @@ class Chatroom extends Component {
     socket.emitUserConnect(this.state.user);
     this.fetchUsers();
     this.fetchChannels();
-    this.fetchMessages();
+    this.fetchMessages('default');
   }
 
   componentWillUnmount() {
@@ -50,7 +52,7 @@ class Chatroom extends Component {
   fetchUsers() {
     axios.get('/api/users', this.config).then(({ data }) => {
       this.setState({
-        users: data
+        users: data.sort()
       })
     }).catch(err => {
       console.log('error fetching users', err);
@@ -59,22 +61,36 @@ class Chatroom extends Component {
 
   fetchChannels() {
     axios.get('/api/channels', this.config).then(({ data }) => {
+      let channels = data.sort();
+      console.log(channels);
       this.setState({
-        channels: data
+        channels: channels
       })
     }).catch(err => {
       console.log('error fetching channels', err);
     })
   }
 
-  fetchMessages() {
-    axios.get('/api/messages', this.config).then(({ data }) => {
+  fetchMessages(channel) {
+    axios.get('/api/messages', {
+      params: {
+        'channel': channel
+      },
+      headers: {
+        'Authorization': 'Bearer ' + Authenticate.getToken()
+      },
+    }).then(({ data }) => {
       this.setState({
         messages: data
       })
     }).catch(err => {
       console.log('error fetching messages', err);
     })
+  }
+  
+  handleClick(channel) {
+    socket.joinChannel(this, channel);
+    this.fetchMessages(channel);
   }
 
   handleLogout() {
@@ -92,10 +108,10 @@ class Chatroom extends Component {
         <div className={styles.logout}>
           <button className={styles.button} onClick={this.handleLogout}>Log Out</button>
         </div>
-        <Channels channels={this.state.channels} />
+        <Channels channels={this.state.channels} handleClick={this.handleClick} />
         <Messages messages={this.state.messages} />
         <Users users={this.state.users} />
-        <Chatbox />
+        <Chatbox channel={this.state.channel} />
       </div>
     )
   }

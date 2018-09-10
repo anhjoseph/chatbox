@@ -39,6 +39,14 @@ server.listen(port, () => {
     
     socket.on('message', msg => MessageController.save(io, msg));
 
+    socket.on('join', channel => {
+      if (socket.channel) {
+        socket.leave(socket.channel);
+      }
+      socket.channel = channel;
+      socket.join(channel);
+    });
+
   });
 
 });

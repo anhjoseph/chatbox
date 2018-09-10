@@ -8,7 +8,7 @@ const ChannelController = {
 
       }).then(data => {
         let channels = [...data].map((channel) => {
-          return { channel: channel.dataValues.channelname }
+          return channel.dataValues.channelname
         });
         res.status(200).send(channels);
       }).catch(err => {
@@ -22,7 +22,7 @@ const ChannelController = {
   save: (io, channel) => {
     // verify token for socket
     Channel.findOrCreate({ where: {
-      channelname: channel.channel
+      channelname: channel
     }}).spread((instance, created) => {
       if (created) {
         io.emit('channel', channel);

@@ -1,12 +1,15 @@
-const { Message } = require('../../db/models');
+const { Channel, Message } = require('../../db/models');
 const { authenticate } = require('../utils/authenticate');
 
 const MessageController = {
   GET: (req, res) => {
     if (authenticate.verify(req.token)) {
       Message.findAll({
-      
+        include: [{ model: Channel, where: {
+          'channelname': req.query.channel
+        }}]
       }).then(data => {
+        console.log('DATA===', data);
         let messages = [...data].map((message) => {
           return {
             username: message.dataValues.username,
@@ -25,12 +28,21 @@ const MessageController = {
 
   save: (io, msg) => {
     // verify token for socket
-    Message.create({
-      username: msg.username,
-      text: msg.text,
-      timestamp: msg.timestamp
+    Channel.find({
+      where: { channelname: msg.channel }
+    }).then(channel => {
+      Message.create({
+        channel_id: channel.id,
+        username: msg.username,
+        text: msg.text,
+        timestamp: msg.timestamp,
+      })
     }).then(() => {
-      io.emit('message', msg)
+      io.in(msg.channel).emit('message', {
+        username: msg.username,
+        text: msg.text,
+        timestamp: msg.timestamp
+      })
     });
   }
 };
