@@ -31,12 +31,23 @@ const MessageController = {
     Channel.find({
       where: { channelname: msg.channel }
     }).then(channel => {
-      Message.create({
-        channel_id: channel.id,
-        username: msg.username,
-        text: msg.text,
-        timestamp: msg.timestamp,
-      })
+      if (channel) {
+        Message.create({
+          channel_id: channel.id,
+          username: msg.username,
+          text: msg.text,
+          timestamp: msg.timestamp,
+        })
+      } else {
+        Message.create({
+          username: msg.username,
+          text: msg.text,
+          timestamp: msg.timestamp,
+          Channel: {
+            channelname: msg.channel
+          }
+        }, { include: [{ model: Channel }] }
+      )}
     }).then(() => {
       io.in(msg.channel).emit('message', {
         username: msg.username,

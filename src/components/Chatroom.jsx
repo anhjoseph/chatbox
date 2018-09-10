@@ -42,7 +42,7 @@ class Chatroom extends Component {
     socket.emitUserConnect(this.state.user);
     this.fetchUsers();
     this.fetchChannels();
-    this.fetchMessages('default');
+    this.handleClick('default');
   }
 
   componentWillUnmount() {
@@ -62,10 +62,9 @@ class Chatroom extends Component {
   fetchChannels() {
     axios.get('/api/channels', this.config).then(({ data }) => {
       let channels = data.sort();
-      console.log(channels);
       this.setState({
         channels: channels
-      })
+      });
     }).catch(err => {
       console.log('error fetching channels', err);
     })
