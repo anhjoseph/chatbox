@@ -1,3 +1,9 @@
 .users {
+  margin-right: 15px;
   grid-area: users;
+  overflow-y: hidden;
+}
+
+.users:hover {
+  overflow-y: scroll;
 }

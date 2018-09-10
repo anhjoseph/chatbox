@@ -1,3 +1,8 @@
 .messages {
-  grid-area: messages
+  grid-area: messages;
+  overflow-y: hidden;
+}
+
+.messages:hover {
+  overflow-y: scroll;
 }

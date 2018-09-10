@@ -1,24 +1,41 @@
+body {
+  margin: 0px;
+}
+
 .chatroom {
-  margin: auto;
-  border: solid 1px;
-  padding: 10px;
-  max-width: 1200px;
+  height: 100vh;
   display: grid;
   grid-template-areas:
-    ". title logout"
+    "channels title logout"
     "channels messages users"
-    ". chatbox .";
-  grid-template-rows: 30px 1fr 40px;
-  grid-template-columns: 140px 1fr 100px;
-  grid-gap: 10px;
+    "channels chatbox .";
+  grid-template-rows: 30px 1fr 50px;
+  grid-template-columns: 180px 1fr 120px;
+  grid-gap: 15px;
 }
 
 .title {
+  margin-top: 15px;
+  padding-left: 10px;
   grid-area: title;
   font-size: 18pt;
   font-weight: bold;
 }
 
 .logout {
+  margin: 15px 15px 0 0;
   grid-area: logout;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #0b3c5d;
 }

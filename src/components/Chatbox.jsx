@@ -32,8 +32,7 @@ class Chatbox extends Component {
     return (
       <div className={styles.chatbox}>
         <form className={styles.form} onSubmit={this.handlePost}>
-          <input className={styles.input} onChange={this.handleChange} />
-          <button className={styles.button}>Send</button>
+          <input type="text" placeholder="Type your message here" className={styles.input} onChange={this.handleChange} />
         </form>
       </div>
     )

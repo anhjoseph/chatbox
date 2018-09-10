@@ -1,5 +1,9 @@
 .message {
-  margin-bottom: 15px;
+  padding: 0 0 15px 10px;
+}
+
+.message:hover {
+  background: rgba(241, 240, 240, 0.966);
 }
 
 .heading {
@@ -7,12 +11,16 @@
 }
 
 .username {
+  padding-right: 10px;
   font-size: 13pt;
   font-weight: bold;
-  padding-right: 10px;
 }
 
 .time {
   font-size: 10pt;
   color: grey;
+}
+
+.text {
+  font-size: 12pt;
 }

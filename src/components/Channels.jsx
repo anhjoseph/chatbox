@@ -25,15 +25,15 @@ class Channels extends Component {
   render() {
     return (
       <aside className={styles.channels}>
-        <form onSubmit={this.handleSubmit}>
-          <input className={styles.input} onChange={this.handleChange} />
+        <form className={styles.form} onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Channel name" className={styles.input} onChange={this.handleChange} />
           <div>
-            <button>Create Channel</button>
+            <button className={styles.button}>Create Channel</button>
           </div>
         </form>
-        <div>
+        <div className={styles.list}>
           {this.props.channels.map(({ channel }) =>
-            <div key={channel} value={channel}>{channel}</div>
+            <div className={styles.channel} key={channel} value={channel}>{channel}</div>
           )}
         </div>
       </aside>
