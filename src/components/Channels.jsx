@@ -24,9 +24,9 @@ class Channels extends Component {
 
   render() {
     return (
-      <div>
-        <form className={styles.form} onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} />
+      <aside className={styles.channels}>
+        <form onSubmit={this.handleSubmit}>
+          <input className={styles.input} onChange={this.handleChange} />
           <div>
             <button>Create Channel</button>
           </div>
@@ -36,7 +36,7 @@ class Channels extends Component {
             <div key={channel} value={channel}>{channel}</div>
           )}
         </div>
-      </div>
+      </aside>
     )
   }
 }

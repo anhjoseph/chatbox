@@ -1,4 +1,3 @@
 .users {
-  float: right
+  grid-area: users;
 }
-

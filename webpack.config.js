@@ -6,6 +6,9 @@ const BUILD_DIR = path.resolve(__dirname, './public');
 module.exports = {
   mode: 'development',
   entry: path.resolve(SRC_DIR, 'index.jsx'),
+  devServer: {
+    contentBase: BUILD_DIR
+  },
   output: {
     filename: 'bundle.js',
     path: BUILD_DIR

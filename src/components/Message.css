@@ -1,5 +1,9 @@
+.message {
+  margin-bottom: 15px;
+}
+
 .heading {
-  padding-bottom: 3px;
+  padding-bottom: 2px;
 }
 
 .username {
