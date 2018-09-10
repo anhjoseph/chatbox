@@ -4,8 +4,8 @@ import Authenticate from '../services/authenticateService';
 import styles from './Chatbox.css';
 
 class Chatbox extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       message: ''
     };
@@ -22,7 +22,7 @@ class Chatbox extends Component {
   handlePost(e) {
     e.preventDefault();
     e.target.reset();
-    socket.emitMessage({
+    socket.emitMessage(this.props.channel, {
       username: Authenticate.getUser(),
       text: this.state.message
     });

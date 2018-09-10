@@ -48,9 +48,10 @@ const Message = db.define('Message', {
   timestamps: false
 });
 
-// Channel.hasMany(Message, { foreignKey: 'channel_id' });
-// User.hasMany(Message, { foreignKey: 'user_id' });
+Channel.hasMany(Message, { foreignKey: 'channel_id' });
+Message.belongsTo(Channel, { foreignKey: 'channel_id' });
 
+// User.hasMany(Message, { foreignKey: 'user_id' });
 // Channel.belongsToMany(User, { through: 'Subscription', foreignKey: 'channel_id', timestamps: false });
 // User.belongsToMany(Channel, { through: 'Subscription', foreignKey: 'user_id', timestamps: false });
 
