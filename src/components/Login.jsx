@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Authenticate from '../services/authenticateService';
 import socket from '../services/socketService';
+import styles from './Login.css';
  
 class Login extends Component {
   constructor(props) {
@@ -44,23 +45,24 @@ class Login extends Component {
     return Authenticate.isAuthenticated() ? (
       <Redirect to="/" />
     ) : (
-      <div>
+      <div className={styles.login}>
+        <div className={styles.title}>
+          Sign in to your account
+        </div>
         <form onSubmit={this.handleLogin}>
-          <div>
-            <label>Username:</label>
-            <input type="text" name="username" onChange={this.handleChange} />
+          <div className={styles.info}>
+            <input className={styles.input} type="text" placeholder="username" name="username" onChange={this.handleChange} />
           </div>
-          <div>
-            <label>Password:</label>
-            <input type="password" name="password" onChange={this.handleChange} />
+          <div className={styles.info}>
+            <input className={styles.input} type="password" placeholder="password" name="password" onChange={this.handleChange} />
           </div>
-          <div>
-            <input type="submit" value="Log In" />
+          <div className={styles.loginButton}>
+            <input className={styles.button} type="submit" value="Sign In" />
           </div>
         </form>
 
-        <div>
-          <button onClick={this.handleClick}>Sign Up</button>
+        <div className={styles.register}>
+          <button className={styles.button} onClick={this.handleClick}>Create an account</button>
         </div>
       </div>
     )

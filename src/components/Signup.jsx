@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Authenticate from '../services/authenticateService';
+import styles from './Signup.css';
 
 class Signup extends Component {
   constructor(props) {
@@ -33,18 +34,19 @@ class Signup extends Component {
     return Authenticate.isAuthenticated() ? (
       <Redirect to="/" />
     ) : (
-      <div>
+      <div className={styles.signup}>
+        <div className={styles.title}>
+          Sign in to your account
+        </div>
         <form onSubmit={this.handleSignup}>
-          <div>
-            <label>Username:</label>
-            <input type="text" name="username" onChange={this.handleChange} />
+          <div className={styles.info}>
+            <input className={styles.input} type="text" placeholder="username" name="username" onChange={this.handleChange} />
+          </div>
+          <div className={styles.info}>
+            <input className={styles.input} type="password" placeholder="password" name="password" onChange={this.handleChange} />
           </div>
           <div>
-            <label>Password:</label>
-            <input type="password" name="password" onChange={this.handleChange} />
-          </div>
-          <div>
-            <input type="submit" value="Sign Up" />
+            <input className={styles.button} type="submit" value="Sign Up" />
           </div>
         </form>
       </div>
