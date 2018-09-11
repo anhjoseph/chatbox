@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build: .
+    restart: always
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://postgres@db:5432/postgres
+    depends_on:
+      - db
+    ports:
+    - "3000:3000"
+  db:
+    image: "postgres"
+    restart: always
+    ports:
+    - "5432:5432"
