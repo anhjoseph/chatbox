@@ -5,11 +5,11 @@ services:
     restart: always
     env_file: .env
     environment:
-      DATABASE_URL: postgres://postgres@db:5432/postgres
+      DATABASE_URL: postgres://postgres@db/chatroom
     depends_on:
       - db
     ports:
-    - "3000:3000"
+    - "3000:80"
   db:
     image: "postgres"
     restart: always
