@@ -14,7 +14,6 @@ class Chatroom extends Component {
 
     this.state = {
       users: [],
-      user: Authenticate.getUser(),
       channels: ['default'],
       channel: 'default',
       messages: []
@@ -26,11 +25,7 @@ class Chatroom extends Component {
       }
     };
 
-    socket.listenUserConnect(this);
-    socket.listenUserDisconnect(this);
-    socket.listenChannel(this);
-    socket.listenMessage(this);
-
+    this.listeners = this.listeners.bind(this);
     this.fetchUsers = this.fetchUsers.bind(this);
     this.fetchChannels = this.fetchChannels.bind(this);
     this.fetchMessages = this.fetchMessages.bind(this);
@@ -39,20 +34,36 @@ class Chatroom extends Component {
   };
 
   componentDidMount() {
-    socket.emitUserConnect(this.state.user);
+    socket.emitUserConnect(Authenticate.getUser());
     this.fetchUsers();
     this.fetchChannels();
     this.fetchMessages('default');
+    this.listeners();
   }
 
-  componentWillUnmount() {
-    socket.emitUserDisconnect(this.state.user);
+  listeners() {
+    socket.listenUserConnect(this);
+    socket.listenUserDisconnect(this);
+    socket.listenChannel(this);
+    socket.listenMessage(this);
   }
-
+  
   fetchUsers() {
+    console.log('getting into fetchUsers');
     axios.get('/api/users', this.config).then(({ data }) => {
+      data.sort(function(a, b) {
+        if (a.status < b.status) {
+          return -1;
+        } else if (a.status > b.status) {
+          return 1;
+        } else if (a.username < b.username) {
+          return -1;
+        } else if (a.username > b.username) {
+          return 1;
+        }
+      });
       this.setState({
-        users: data.sort()
+        users: data
       })
     }).catch(err => {
       console.log('error fetching users', err);
@@ -60,6 +71,7 @@ class Chatroom extends Component {
   }
 
   fetchChannels() {
+    console.log('getting into fetchchannels');
     axios.get('/api/channels', this.config).then(({ data }) => {
       let channels = data.sort();
       this.setState({
@@ -71,14 +83,12 @@ class Chatroom extends Component {
   }
 
   fetchMessages(channel) {
-    axios.get('/api/messages', {
-      params: {
-        'channel': channel
-      },
-      headers: {
-        'Authorization': 'Bearer ' + Authenticate.getToken()
-      },
-    }).then(({ data }) => {
+    console.log('getting into fetchMessages');
+    axios.get('/api/messages', { params: {
+      'channel': channel
+    }, headers: {
+      'Authorization': 'Bearer ' + Authenticate.getToken()
+    }}).then(({ data }) => {
       this.setState({
         messages: data
       })
@@ -93,7 +103,7 @@ class Chatroom extends Component {
   }
 
   handleLogout() {
-    socket.emitUserDisconnect(this.state.user);
+    socket.emitUserDisconnect(Authenticate.getUser());
     Authenticate.removeToken();
     this.props.history.push('/login');
   }

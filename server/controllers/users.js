@@ -4,11 +4,12 @@ const { authenticate } = require('../utils/authenticate');
 const UserController = {
   GET: (req, res) => {
     if (authenticate.verify(req.token)) {
-      User.findAll({
-        where: { status: true }
-      }).then(data => {
+      User.findAll().then(data => {
         let users = [...data].map(user => {
-          return user.dataValues.username
+          return {
+            username: user.dataValues.username,
+            status: user.dataValues.status
+          }
         });
         res.status(200).send(users);
       }).catch(err => {
@@ -32,6 +33,7 @@ const UserController = {
   },
 
   disconnect: (socket, username) => {
+    console.log('USERNAME ON DC ===', username);
     User.findOne({ where: {
       username: username
     }}).then(user => {
@@ -40,7 +42,7 @@ const UserController = {
           socket.broadcast.emit('user disconnected', username);
         })
       }
-    }).catch(err => {})
+    })
   }
 };
 

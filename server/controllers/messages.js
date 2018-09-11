@@ -9,7 +9,6 @@ const MessageController = {
           'channelname': req.query.channel
         }}]
       }).then(data => {
-        console.log('DATA===', data);
         let messages = [...data].map((message) => {
           return {
             username: message.dataValues.username,
