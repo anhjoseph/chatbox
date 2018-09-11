@@ -3,7 +3,7 @@ import axios from 'axios';
 import Messages from './Messages.jsx';
 import Chatbox from './Chatbox.jsx';
 import Channels from './Channels.jsx';
-import Users from './users.jsx';
+import Users from './Users.jsx';
 import Authenticate from '../services/authenticateService';
 import socket from '../services/socketService';
 import styles from './Chatroom.css';
