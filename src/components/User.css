@@ -1,0 +1,23 @@
+.user {
+  margin-bottom: 5px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offline {
+  margin-top: 2px;
+  height: 7px;
+  width: 7px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+.online {
+  margin-top: 2px;
+  height: 7px;
+  width: 7px;
+  background-color: #1ec51e;
+  border-radius: 50%;
+}

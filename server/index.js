@@ -26,16 +26,22 @@ server.listen(port, () => {
 
   io.on('connection', (socket) => {
 
-    socket.on('user connected', user => {
-      socket.join('default');
-      socket.channel = 'default';
+    socket.join('default');
+    socket.channel = 'default';
+
+    socket.on('user connected', (user) => {
       socket.username = user;
-      UserController.connect(io, socket.username);
+      UserController.connect(io, user);
     });
 
-    socket.on('user disconnected', user => UserController.disconnect(socket, user));
+    socket.on('user disconnected', (user) => {
+      socket.leave(socket.channel);
+      UserController.disconnect(socket, user)
+    });
 
-    socket.on('disconnect', () => UserController.disconnect(socket, socket.username));
+    socket.on('disconnect', () => {
+      UserController.disconnect(socket, socket.username);
+    });
 
     socket.on('channel', channel => ChannelController.save(io, channel));
     

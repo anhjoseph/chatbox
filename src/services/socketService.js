@@ -1,4 +1,5 @@
 import socketIOClient from 'socket.io-client';
+import update from 'immutability-helper';
 const socket = socketIOClient();
 
 const socketService = {
@@ -31,26 +32,50 @@ const socketService = {
   },
 
   listenUserConnect: function(context) {
-    socket.on('user connected', (user) => {
-      const index = context.state.users.indexOf(user);
-      if (index === -1) {
-        context.setState({
-          users: [...context.state.users, user].sort()
-        });
-      }
+    socket.on('user connected', function(username) {
+      let usernames = context.state.users.map(user => {
+        return user.username;
+      });
+      let index = usernames.indexOf(username);
+      let newUsers = update(context.state.users, {[index]: {status: {$set: true}}});
+      newUsers.sort(function(a, b) {
+        if (a.status < b.status) {
+          return 1;
+        } else if (a.status > b.status) {
+          return -1;
+        } else if (a.username < b.username) {
+          return -1;
+        } else if (a.username > b.username) {
+          return 1;
+        }
+      });
+      context.setState({
+        users: newUsers
+      });
     })
   },
 
   listenUserDisconnect: function(context) {
-    socket.on('user disconnected', (user) => {
-      let users = [...context.state.users];
-      const index = users.indexOf(user);
-      if (index !== -1) {
-        users.splice(index, 1);
-        context.setState({
-          users: users
-        });
-      }
+    socket.on('user disconnected', function(username) {
+      let usernames = context.state.users.map(user => {
+        return user.username;
+      });
+      let index = usernames.indexOf(username);
+      let newUsers = update(context.state.users, {[index]: {status: {$set: false}}});
+      newUsers.sort(function(a, b) {
+        if (a.status < b.status) {
+          return 1;
+        } else if (a.status > b.status) {
+          return -1;
+        } else if (a.username < b.username) {
+          return -1;
+        } else if (a.username > b.username) {
+          return 1;
+        }
+      });
+      context.setState({
+        users: newUsers
+      });
     })
   },
   

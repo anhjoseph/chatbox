@@ -1,4 +1,5 @@
 import React from 'react';
+import User from './User.jsx';
 import styles from './Users.css';
 
 const Users = (props) => (
@@ -7,7 +8,7 @@ const Users = (props) => (
       Members
     </div>
     {props.users.map(user => 
-      <div className={styles.user} key={user}>{user}</div>
+      <User user={user} key={user.username} />
     )}
   </div>
 )

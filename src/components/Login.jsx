@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Authenticate from '../services/authenticateService';
-import socket from '../services/socketService';
+import socket from '../services/socketService.js';
 import styles from './Login.css';
  
 class Login extends Component {
@@ -28,8 +28,7 @@ class Login extends Component {
     }).then(({ data }) => {
       if (data.token) {
         Authenticate.setToken(data.token);
-        let user = Authenticate.getUser();
-        socket.emitUserConnect(user);
+        socket.emitUserConnect(Authenticate.getUser());
         this.props.history.push('/');
       }
     }).catch(err => {
@@ -42,29 +41,31 @@ class Login extends Component {
   }
 
   render() {
-    return Authenticate.isAuthenticated() ? (
-      <Redirect to="/" />
-    ) : (
-      <div className={styles.login}>
-        <div className={styles.title}>
-          Sign in to your account
-        </div>
-        <form onSubmit={this.handleLogin}>
-          <div className={styles.info}>
-            <input className={styles.input} type="text" placeholder="username" name="username" onChange={this.handleChange} />
+    return (
+      Authenticate.isAuthenticated() ? (
+        <Redirect to="/" />
+      ) : (
+        <div className={styles.login}>
+          <div className={styles.title}>
+            Sign in to your account
           </div>
-          <div className={styles.info}>
-            <input className={styles.input} type="password" placeholder="password" name="password" onChange={this.handleChange} />
-          </div>
-          <div className={styles.loginButton}>
-            <input className={styles.button} type="submit" value="Sign In" />
-          </div>
-        </form>
+          <form onSubmit={this.handleLogin}>
+            <div className={styles.info}>
+              <input className={styles.input} type="text" placeholder="username" name="username" onChange={this.handleChange} />
+            </div>
+            <div className={styles.info}>
+              <input className={styles.input} type="password" placeholder="password" name="password" onChange={this.handleChange} />
+            </div>
+            <div className={styles.loginButton}>
+              <input className={styles.button} type="submit" value="Sign In" />
+            </div>
+          </form>
 
-        <div className={styles.register}>
-          <button className={styles.button} onClick={this.handleClick}>Create an account</button>
+          <div className={styles.register}>
+            <button className={styles.button} onClick={this.handleClick}>Create an account</button>
+          </div>
         </div>
-      </div>
+      )
     )
   }
 }
