@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const db = new Sequelize('chatroom', 'postgres', '', {
-  host: 'db',
+  host: 'postgres',
   dialect: 'postgres'
 });
 
