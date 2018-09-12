@@ -4,9 +4,11 @@ import styles from './Messages.css';
 
 const Messages = (props) => (
   <main className={styles.messages}>
-    {props.messages.map((message, i) => 
-      <Message message={message} key={i} />
-    )}
+    <div className={styles.container}>
+      {props.messages.map((message, i) => 
+        <Message message={message} key={i} />
+      )}
+    </div>
   </main>
 )
 

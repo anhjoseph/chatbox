@@ -94,8 +94,11 @@ const socketService = {
   
   listenChannel: function(context) {
     socket.on('channel', (channel) => {
+      let channels = context.state.channels.slice(1);
+      channels.push(channel);
+      channels.sort();
       context.setState({
-        channels: [...context.state.channels, channel].sort()
+        channels: [context.state.channels[0], ...channels]
       });
     });
   }

@@ -40,7 +40,7 @@ class Signup extends Component {
         </div>
         <form onSubmit={this.handleSignup}>
           <div className={styles.info}>
-            <input className={styles.input} type="text" placeholder="username" name="username" onChange={this.handleChange} />
+            <input className={styles.input} type="text" placeholder="username" name="username" maxLength="15" onChange={this.handleChange} />
           </div>
           <div className={styles.info}>
             <input className={styles.input} type="password" placeholder="password" name="password" onChange={this.handleChange} />

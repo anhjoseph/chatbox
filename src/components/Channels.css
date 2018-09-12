@@ -46,11 +46,11 @@
 
 .list {
   height: 87%;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .list:hover {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .channel {
@@ -62,4 +62,11 @@
 .channel:hover {
   background-color: #0b3c5d;
   cursor: pointer;
+}
+
+.currentChannel {
+  padding: 0 16px 3px 15px;
+  font-size: 13pt;
+  color: white;
+  background-color: #0b3c5d;
 }

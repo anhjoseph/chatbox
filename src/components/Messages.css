@@ -1,10 +1,15 @@
 .messages {
   border-top: 1px solid black;
-  padding-top: 8px;
+  display: flex;
+  flex-direction: column-reverse;
   grid-area: messages;
   overflow-y: hidden;
 }
 
 .messages:hover {
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.container {
+  padding-top: 8px;
 }

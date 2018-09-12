@@ -71,7 +71,10 @@ class Chatroom extends Component {
 
   fetchChannels() {
     axios.get('/api/channels', this.config).then(({ data }) => {
+      let index = data.indexOf('default');
+      data.splice(index, 1);
       let channels = data.sort();
+      channels.unshift('default');
       this.setState({
         channels: channels
       });
@@ -114,7 +117,7 @@ class Chatroom extends Component {
         <div className={styles.logout}>
           <button className={styles.button} onClick={this.handleLogout}>Log Out</button>
         </div>
-        <Channels channels={this.state.channels} handleClick={this.handleClick} />
+        <Channels channels={this.state.channels} channel={this.state.channel} handleClick={this.handleClick} />
         <Messages messages={this.state.messages} />
         <Users users={this.state.users} />
         <Chatbox channel={this.state.channel} />
