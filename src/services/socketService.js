@@ -33,11 +33,16 @@ const socketService = {
 
   listenUserConnect: function(context) {
     socket.on('user connected', function(username) {
+      let newUsers;
       let usernames = context.state.users.map(user => {
         return user.username;
       });
       let index = usernames.indexOf(username);
-      let newUsers = update(context.state.users, {[index]: {status: {$set: true}}});
+      if (index !== -1) {
+        newUsers = update(context.state.users, {[index]: {status: {$set: true}}});
+      } else {
+        newUsers = [{ username: username, status: false }, ...context.state.users]
+      }
       newUsers.sort(function(a, b) {
         if (a.status < b.status) {
           return 1;

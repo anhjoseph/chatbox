@@ -49,7 +49,6 @@ class Chatroom extends Component {
   }
   
   fetchUsers() {
-    console.log('getting into fetchUsers');
     axios.get('/api/users', this.config).then(({ data }) => {
       data.sort(function(a, b) {
         if (a.status < b.status) {
@@ -71,7 +70,6 @@ class Chatroom extends Component {
   }
 
   fetchChannels() {
-    console.log('getting into fetchchannels');
     axios.get('/api/channels', this.config).then(({ data }) => {
       let channels = data.sort();
       this.setState({
@@ -83,7 +81,6 @@ class Chatroom extends Component {
   }
 
   fetchMessages(channel) {
-    console.log('getting into fetchMessages');
     axios.get('/api/messages', { params: {
       'channel': channel
     }, headers: {

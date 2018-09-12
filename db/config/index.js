@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('chatroom', 'postgres', '', {
+const db = new Sequelize('chatroom', 'postgres', process.env.DB_PASS, {
   host: process.env.DB,
   dialect: 'postgres'
 });

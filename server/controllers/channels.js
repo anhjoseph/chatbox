@@ -20,7 +20,6 @@ const ChannelController = {
   },
 
   save: (io, channel) => {
-    // verify token for socket
     Channel.findOrCreate({ where: {
       channelname: channel
     }}).spread((instance, created) => {

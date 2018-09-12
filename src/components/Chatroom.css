@@ -17,7 +17,7 @@ button {
     "channels messages users"
     "channels chatbox .";
   grid-template-rows: 40px 1fr 50px;
-  grid-template-columns: 180px 1fr 120px;
+  grid-template-columns: 180px 1fr 160px;
   grid-gap: 15px;
 }
 

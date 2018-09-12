@@ -26,7 +26,6 @@ const MessageController = {
   },
 
   save: (io, msg) => {
-    // verify token for socket
     Channel.find({
       where: { channelname: msg.channel }
     }).then(channel => {

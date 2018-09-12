@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const path = require('path');
@@ -13,7 +14,6 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
-require('dotenv').config();
 require('../db/config');
 
 app.use(parser.json());
