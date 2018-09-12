@@ -33,7 +33,11 @@ class Channels extends Component {
         </form>
         <div className={styles.list}>
           {this.props.channels.map(channel =>
-            <div className={styles.channel} key={channel} onClick={() => this.props.handleClick(channel)}>{channel}</div>
+            <div 
+              className={this.props.channel === channel ? styles.currentChannel : styles.channel}
+              key={channel}
+              onClick={() => this.props.handleClick(channel)
+            }>{channel}</div>
           )}
         </div>
       </aside>
