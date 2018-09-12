@@ -33,7 +33,6 @@ const UserController = {
   },
 
   disconnect: (socket, username) => {
-    console.log('USERNAME ON DC ===', username);
     User.findOne({ where: {
       username: username
     }}).then(user => {
