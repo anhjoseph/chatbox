@@ -20,8 +20,6 @@
 
 .offline {
   margin-top: 2px;
-  position: relative;
-  z-index: 1;
   height: 7px;
   width: 7px;
   background-color: #555;
@@ -30,8 +28,6 @@
 
 .online {
   margin-top: 2px;
-  position: relative;
-  z-index: 1;
   height: 7px;
   width: 7px;
   background-color: #1ec51e;
