@@ -27,15 +27,6 @@ body {
   width: 500px;
 }
 
-.loginButton {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-}
-
-.register {
-  padding-bottom: 5px;
-}
-
 .input {
   border: 1px solid #c1c8e4;
   border-radius: 2px;
@@ -63,4 +54,8 @@ body {
   font-family: 'Karla', sans-serif;
   letter-spacing: 1px;
   background-color: #5085a5;
+}
+
+.button:hover {
+  cursor: pointer;
 }
