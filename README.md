@@ -27,6 +27,7 @@ $ npm start
 ## Features
 * Signup and Login authentication with JWT and bcrypt
 * JWT-protected API routes
+* Send messages to users in a channel
 * Display messages pertaining to current channel
 * Display list of users and their current online status
 * Create, join, and leave channels
