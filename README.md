@@ -1,7 +1,7 @@
 # Real-time Chatroom
 A node.js real-time chat application powered by Socket.io and Express
 
-* Front-end Framework: **React**, **React-router**
+* Front-end Framework: **React**, **React Router**
 * Back-end: **Node.js**, **Express.js**, **Socket.io**
 * Database: **PostgreSQL**
 * Bundle: **Webpack**, **Babel**
