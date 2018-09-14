@@ -23,6 +23,7 @@ class Login extends Component {
   handleLogin(e) {
     e.preventDefault();
     const { username, password } = this.state;
+    const { history } = this.props;
     axios
       .post('/auth/login', {
         username,
@@ -32,13 +33,14 @@ class Login extends Component {
         if (data.token) {
           Authenticate.setToken(data.token);
           socket.emitUserConnect(Authenticate.getUser());
-          this.props.history.push('/');
+          history.push('/');
         }
       });
   }
 
   handleClick() {
-    this.props.history.push('/signup');
+    const { history } = this.props;
+    history.push('/signup');
   }
 
   render() {
@@ -72,7 +74,11 @@ class Login extends Component {
         </form>
 
         <div className={styles.register}>
-          <button className={styles.button} onClick={this.handleClick}>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={this.handleClick}
+          >
             Create an account
           </button>
         </div>

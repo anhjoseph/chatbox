@@ -22,8 +22,9 @@ class Chatbox extends Component {
   handlePost(e) {
     e.preventDefault();
     e.target.reset();
+    const { channel } = this.props;
     const { message } = this.state;
-    socket.emitMessage(this.props.channel, {
+    socket.emitMessage(channel, {
       username: Authenticate.getUser(),
       text: message,
     });
@@ -34,9 +35,9 @@ class Chatbox extends Component {
       <div className={styles.chatbox}>
         <form className={styles.form} onSubmit={this.handlePost}>
           <input
+            className={styles.input}
             type="text"
             placeholder="Type your message here"
-            className={styles.input}
             onChange={this.handleChange}
           />
         </form>

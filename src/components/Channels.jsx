@@ -24,6 +24,7 @@ class Channels extends Component {
   }
 
   render() {
+    const { channel, channels, handleClick } = this.props;
     return (
       <aside className={styles.channels}>
         <form className={styles.form} onSubmit={this.handleSubmit}>
@@ -35,19 +36,22 @@ class Channels extends Component {
             onChange={this.handleChange}
           />
           <div>
-            <button className={styles.button}>Create Channel</button>
+            <button type="submit" className={styles.button}>
+              Create Channel
+            </button>
           </div>
         </form>
         <div className={styles.list}>
-          {this.props.channels.map(channel => (
+          {channels.map(el => (
             <div
               className={
-                this.props.channel === channel
-                  ? styles.currentChannel
-                  : styles.channel
+                channel === el ? styles.currentChannel : styles.channel
               }
               key={channel}
-              onClick={() => this.props.handleClick(channel)}
+              onClick={() => handleClick(channel)}
+              onKeyPress={() => handleClick(channel)}
+              role="menuitem"
+              tabIndex={0}
             >
               {channel}
             </div>

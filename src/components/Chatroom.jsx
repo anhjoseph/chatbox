@@ -49,47 +49,35 @@ class Chatroom extends Component {
   }
 
   fetchUsers() {
-    axios
-      .get('/api/users', this.config)
-      .then(({ data }) => {
-        data.sort((a, b) => {
-          if (a.status < b.status) {
-            return -1;
-          }
-          if (a.status > b.status) {
-            return 1;
-          }
-          if (a.username < b.username) {
-            return -1;
-          }
-          if (a.username > b.username) {
-            return 1;
-          }
-        });
-        this.setState({
-          users: data,
-        });
-      })
-      .catch(err => {
-        console.log('error fetching users', err);
+    axios.get('/api/users', this.config).then(({ data }) => {
+      data.sort((a, b) => {
+        if (a.status < b.status) {
+          return -1;
+        }
+        if (a.status > b.status) {
+          return 1;
+        }
+        if (a.username < b.username) {
+          return -1;
+        }
+        return 1;
       });
+      this.setState({
+        users: data,
+      });
+    });
   }
 
   fetchChannels() {
-    axios
-      .get('/api/channels', this.config)
-      .then(({ data }) => {
-        const index = data.indexOf('default');
-        data.splice(index, 1);
-        const channels = data.sort();
-        channels.unshift('default');
-        this.setState({
-          channels,
-        });
-      })
-      .catch(err => {
-        console.log('error fetching channels', err);
+    axios.get('/api/channels', this.config).then(({ data }) => {
+      const index = data.indexOf('default');
+      data.splice(index, 1);
+      const channels = data.sort();
+      channels.unshift('default');
+      this.setState({
+        channels,
       });
+    });
   }
 
   fetchMessages(channel) {
@@ -106,9 +94,6 @@ class Chatroom extends Component {
         this.setState({
           messages: data,
         });
-      })
-      .catch(err => {
-        console.log('error fetching messages', err);
       });
   }
 
@@ -118,28 +103,34 @@ class Chatroom extends Component {
   }
 
   handleLogout() {
+    const { history } = this.props;
     socket.emitUserDisconnect(Authenticate.getUser());
     Authenticate.removeToken();
-    this.props.history.push('/login');
+    history.push('/login');
   }
 
   render() {
+    const { channel, channels, messages, users } = this.state;
     return (
       <div className={styles.chatroom}>
-        <div className={styles.title}>{this.state.channel}</div>
+        <div className={styles.title}>{channel}</div>
         <div className={styles.logout}>
-          <button className={styles.button} onClick={this.handleLogout}>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={this.handleLogout}
+          >
             Log Out
           </button>
         </div>
         <Channels
-          channels={this.state.channels}
-          channel={this.state.channel}
+          channels={channels}
+          channel={channel}
           handleClick={this.handleClick}
         />
-        <Messages messages={this.state.messages} />
-        <Users users={this.state.users} />
-        <Chatbox channel={this.state.channel} />
+        <Messages messages={messages} />
+        <Users users={users} />
+        <Chatbox channel={channel} />
       </div>
     );
   }

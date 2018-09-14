@@ -54,9 +54,7 @@ const socketService = {
         if (a.username < b.username) {
           return -1;
         }
-        if (a.username > b.username) {
-          return 1;
-        }
+        return 1;
       });
       context.setState({
         users: newUsers,
@@ -81,9 +79,7 @@ const socketService = {
         if (a.username < b.username) {
           return -1;
         }
-        if (a.username > b.username) {
-          return 1;
-        }
+        return 1;
       });
       context.setState({
         users: newUsers,
