@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Messages from './Messages.jsx';
-import Chatbox from './Chatbox.jsx';
-import Channels from './Channels.jsx';
-import Users from './Users.jsx';
+import Messages from './Messages';
+import Chatbox from './Chatbox';
+import Channels from './Channels';
+import Users from './Users';
 import Authenticate from '../services/authenticateService';
 import socket from '../services/socketService';
 import styles from './Chatroom.css';
@@ -16,13 +16,13 @@ class Chatroom extends Component {
       users: [],
       channels: ['default'],
       channel: 'default',
-      messages: []
+      messages: [],
     };
 
     this.config = {
       headers: {
-        Authorization: 'Bearer ' + Authenticate.getToken()
-      }
+        Authorization: `Bearer ${Authenticate.getToken()}`,
+      },
     };
 
     this.listeners = this.listeners.bind(this);
@@ -31,7 +31,7 @@ class Chatroom extends Component {
     this.fetchMessages = this.fetchMessages.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-  };
+  }
 
   componentDidMount() {
     socket.emitUserConnect(Authenticate.getUser());
@@ -47,56 +47,71 @@ class Chatroom extends Component {
     socket.listenChannel(this);
     socket.listenMessage(this);
   }
-  
+
   fetchUsers() {
-    axios.get('/api/users', this.config).then(({ data }) => {
-      data.sort(function(a, b) {
-        if (a.status < b.status) {
-          return -1;
-        } else if (a.status > b.status) {
-          return 1;
-        } else if (a.username < b.username) {
-          return -1;
-        } else if (a.username > b.username) {
-          return 1;
-        }
-      });
-      this.setState({
-        users: data
+    axios
+      .get('/api/users', this.config)
+      .then(({ data }) => {
+        data.sort((a, b) => {
+          if (a.status < b.status) {
+            return -1;
+          }
+          if (a.status > b.status) {
+            return 1;
+          }
+          if (a.username < b.username) {
+            return -1;
+          }
+          if (a.username > b.username) {
+            return 1;
+          }
+        });
+        this.setState({
+          users: data,
+        });
       })
-    }).catch(err => {
-      console.log('error fetching users', err);
-    })
+      .catch(err => {
+        console.log('error fetching users', err);
+      });
   }
 
   fetchChannels() {
-    axios.get('/api/channels', this.config).then(({ data }) => {
-      let index = data.indexOf('default');
-      data.splice(index, 1);
-      let channels = data.sort();
-      channels.unshift('default');
-      this.setState({
-        channels: channels
+    axios
+      .get('/api/channels', this.config)
+      .then(({ data }) => {
+        const index = data.indexOf('default');
+        data.splice(index, 1);
+        const channels = data.sort();
+        channels.unshift('default');
+        this.setState({
+          channels,
+        });
+      })
+      .catch(err => {
+        console.log('error fetching channels', err);
       });
-    }).catch(err => {
-      console.log('error fetching channels', err);
-    })
   }
 
   fetchMessages(channel) {
-    axios.get('/api/messages', { params: {
-      'channel': channel
-    }, headers: {
-      'Authorization': 'Bearer ' + Authenticate.getToken()
-    }}).then(({ data }) => {
-      this.setState({
-        messages: data
+    axios
+      .get('/api/messages', {
+        params: {
+          channel,
+        },
+        headers: {
+          Authorization: `Bearer ${Authenticate.getToken()}`,
+        },
       })
-    }).catch(err => {
-      console.log('error fetching messages', err);
-    })
+      .then(({ data }) => {
+        this.setState({
+          messages: data,
+        });
+      })
+      .catch(err => {
+        console.log('error fetching messages', err);
+      });
   }
-  
+
   handleClick(channel) {
     socket.joinChannel(this, channel);
     this.fetchMessages(channel);
@@ -111,19 +126,23 @@ class Chatroom extends Component {
   render() {
     return (
       <div className={styles.chatroom}>
-        <div className={styles.title}>
-          {this.state.channel}
-        </div>
+        <div className={styles.title}>{this.state.channel}</div>
         <div className={styles.logout}>
-          <button className={styles.button} onClick={this.handleLogout}>Log Out</button>
+          <button className={styles.button} onClick={this.handleLogout}>
+            Log Out
+          </button>
         </div>
-        <Channels channels={this.state.channels} channel={this.state.channel} handleClick={this.handleClick} />
+        <Channels
+          channels={this.state.channels}
+          channel={this.state.channel}
+          handleClick={this.handleClick}
+        />
         <Messages messages={this.state.messages} />
         <Users users={this.state.users} />
         <Chatbox channel={this.state.channel} />
       </div>
-    )
+    );
   }
-};
+}
 
 export default Chatroom;

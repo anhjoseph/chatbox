@@ -1,16 +1,14 @@
 import React from 'react';
-import User from './User.jsx';
+import User from './User';
 import styles from './Users.css';
 
-const Users = (props) => (
+const Users = ({ users }) => (
   <div className={styles.users}>
-    <div className={styles.header}>
-      Members
-    </div>
-    {props.users.map(user => 
+    <div className={styles.header}>Members</div>
+    {users.map(user => (
       <User user={user} key={user.username} />
-    )}
+    ))}
   </div>
-)
+);
 
 export default Users;

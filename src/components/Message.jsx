@@ -2,13 +2,14 @@ import React from 'react';
 import Linkify from 'react-linkify';
 import styles from './Message.css';
 
-const Message = (props) => (
+const Message = ({ message }) => (
   <div className={styles.message}>
     <div className={styles.heading}>
-      <span className={styles.username}>{props.message.username}</span><span className={styles.time}>{props.message.timestamp}</span>
+      <span className={styles.username}>{message.username}</span>
+      <span className={styles.time}>{message.timestamp}</span>
     </div>
     <div className={styles.text}>
-      <Linkify>{props.message.text}</Linkify>
+      <Linkify>{message.text}</Linkify>
     </div>
   </div>
 );

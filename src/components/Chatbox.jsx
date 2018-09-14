@@ -7,7 +7,7 @@ class Chatbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      message: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
@@ -15,16 +15,17 @@ class Chatbox extends Component {
 
   handleChange(e) {
     this.setState({
-      message: e.target.value
-    })
+      message: e.target.value,
+    });
   }
 
   handlePost(e) {
     e.preventDefault();
     e.target.reset();
+    const { message } = this.state;
     socket.emitMessage(this.props.channel, {
       username: Authenticate.getUser(),
-      text: this.state.message
+      text: message,
     });
   }
 
@@ -32,11 +33,16 @@ class Chatbox extends Component {
     return (
       <div className={styles.chatbox}>
         <form className={styles.form} onSubmit={this.handlePost}>
-          <input type="text" placeholder="Type your message here" className={styles.input} onChange={this.handleChange} />
+          <input
+            type="text"
+            placeholder="Type your message here"
+            className={styles.input}
+            onChange={this.handleChange}
+          />
         </form>
       </div>
-    )
+    );
   }
-};
+}
 
 export default Chatbox;

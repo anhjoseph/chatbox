@@ -12,36 +12,49 @@ class Channels extends Component {
 
   handleChange(e) {
     this.setState({
-      channelName: e.target.value
-    })
+      channelName: e.target.value,
+    });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     e.target.reset();
-    socket.emitChannel(this.state.channelName);
+    const { channelName } = this.state;
+    socket.emitChannel(channelName);
   }
 
   render() {
     return (
       <aside className={styles.channels}>
         <form className={styles.form} onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Channel name" maxLength="16" className={styles.input} onChange={this.handleChange} />
+          <input
+            type="text"
+            placeholder="Channel name"
+            maxLength="16"
+            className={styles.input}
+            onChange={this.handleChange}
+          />
           <div>
             <button className={styles.button}>Create Channel</button>
           </div>
         </form>
         <div className={styles.list}>
-          {this.props.channels.map(channel =>
-            <div 
-              className={this.props.channel === channel ? styles.currentChannel : styles.channel}
+          {this.props.channels.map(channel => (
+            <div
+              className={
+                this.props.channel === channel
+                  ? styles.currentChannel
+                  : styles.channel
+              }
               key={channel}
-              onClick={() => this.props.handleClick(channel)
-            }>{channel}</div>
-          )}
+              onClick={() => this.props.handleClick(channel)}
+            >
+              {channel}
+            </div>
+          ))}
         </div>
       </aside>
-    )
+    );
   }
 }
 

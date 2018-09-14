@@ -4,15 +4,15 @@ const http = require('http');
 const path = require('path');
 const parser = require('body-parser');
 
-const { router } = require('./router');
-const { UserController } = require('./controllers/users');
-const { ChannelController } = require('./controllers/channels');
-const { MessageController } = require('./controllers/messages');
-
 const app = express();
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = require('socket.io')(server);
+
+const { router } = require('./router');
+const { UserController } = require('./controllers/users');
+const { ChannelController } = require('./controllers/channels');
+const { MessageController } = require('./controllers/messages');
 
 require('../db/config');
 
@@ -24,19 +24,21 @@ app.use('/', router);
 server.listen(port, () => {
   console.log(`server running at ${port}`);
 
-  io.on('connection', (socket) => {
-
+  io.on('connection', socket => {
     socket.join('default');
     socket.channel = 'default';
 
-    socket.on('user connected', (user) => {
+    socket.on('user connected', user => {
       socket.username = user;
-      UserController.connect(io, user);
+      UserController.connect(
+        io,
+        user,
+      );
     });
 
-    socket.on('user disconnected', (user) => {
+    socket.on('user disconnected', user => {
       socket.leave(socket.channel);
-      UserController.disconnect(socket, user)
+      UserController.disconnect(socket, user);
     });
 
     socket.on('disconnect', () => {
@@ -44,7 +46,7 @@ server.listen(port, () => {
     });
 
     socket.on('channel', channel => ChannelController.save(io, channel));
-    
+
     socket.on('message', msg => MessageController.save(io, msg));
 
     socket.on('join', channel => {
@@ -52,7 +54,5 @@ server.listen(port, () => {
       socket.channel = channel;
       socket.join(channel);
     });
-
   });
-
 });

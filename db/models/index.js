@@ -1,52 +1,64 @@
 const Sequelize = require('sequelize');
 const { db } = require('../config');
 
-const User = db.define('User', {
-  username: {
-    type: Sequelize.STRING,
-    allowNull: false
+const User = db.define(
+  'User',
+  {
+    username: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
+    status: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+    },
   },
-
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false
+  {
+    timestamps: false,
   },
+);
 
-  status: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false
-  }
-}, {
-  timestamps: false
-});
-
-const Channel = db.define('Channel', {
-  channelname: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-}, {
-  timestamps: false
-});
-
-const Message = db.define('Message', {
-  username: {
-    type: Sequelize.STRING,
-    allowNull: false
+const Channel = db.define(
+  'Channel',
+  {
+    channelname: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
   },
-
-  text: {
-    type: Sequelize.STRING,
-    allowNull: false
+  {
+    timestamps: false,
   },
+);
 
-  timestamp: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-}, {
-  timestamps: false
-});
+const Message = db.define(
+  'Message',
+  {
+    username: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
+    text: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
+    timestamp: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    timestamps: false,
+  },
+);
 
 Channel.hasMany(Message, { foreignKey: 'channel_id' });
 Message.belongsTo(Channel, { foreignKey: 'channel_id' });
@@ -57,10 +69,10 @@ Message.belongsTo(Channel, { foreignKey: 'channel_id' });
 
 db.sync({ force: false })
   .then(() => console.log('successfully connected to db'))
-  .catch(err => console.log('error syncing to database', err))
+  .catch(err => console.log('error syncing to database', err));
 
 module.exports = {
-  User: User,
-  Channel: Channel,
-  Message: Message
+  User,
+  Channel,
+  Message,
 };

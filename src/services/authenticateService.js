@@ -1,40 +1,39 @@
 import decode from 'jwt-decode';
 
 const authService = {
-  setToken: function(token) {
+  setToken(token) {
     localStorage.setItem('token', token);
   },
 
-  removeToken: function() {
+  removeToken() {
     localStorage.removeItem('token');
   },
 
-  getToken: function() {
+  getToken() {
     return localStorage.getItem('token');
   },
 
-  getUser: function() {
+  getUser() {
     const payload = decode(this.getToken());
     return payload.username;
   },
 
-  isTokenExpired: function(token) {
+  isTokenExpired(token) {
     try {
       const decoded = decode(token);
       if (decoded.exp < Date.now() / 1000) {
         return true;
-      } else {
-        return false;
       }
+      return false;
     } catch (err) {
       return false;
     }
   },
 
-  isAuthenticated: function() {
+  isAuthenticated() {
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token);
-  }
-}
+  },
+};
 
 export default authService;

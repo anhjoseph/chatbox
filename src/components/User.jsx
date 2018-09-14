@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './User.css';
 
-const User = (props) => (
+const User = ({ user }) => (
   <div className={styles.user}>
-    <div className={styles.username}>{props.user.username}</div>
-    <div className={props.user.status ? styles.online : styles.offline} />
+    <div className={styles.username}>{user.username}</div>
+    <div className={user.status ? styles.online : styles.offline} />
   </div>
 );
 
