@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import socket from '../services/socketService';
 import styles from './Channels.css';
 
@@ -24,6 +25,7 @@ class Channels extends Component {
   }
 
   render() {
+    const { channels, channel, handleClick } = this.props;
     return (
       <aside className={styles.channels}>
         <form className={styles.form} onSubmit={this.handleSubmit}>
@@ -35,21 +37,24 @@ class Channels extends Component {
             onChange={this.handleChange}
           />
           <div>
-            <button className={styles.button}>Create Channel</button>
+            <button type="submit" className={styles.button}>
+              Create Channel
+            </button>
           </div>
         </form>
         <div className={styles.list}>
-          {this.props.channels.map(channel => (
+          {channels.map(channelName => (
             <div
               className={
-                this.props.channel === channel
-                  ? styles.currentChannel
-                  : styles.channel
+                channel === channelName ? styles.currentChannel : styles.channel
               }
-              key={channel}
-              onClick={() => this.props.handleClick(channel)}
+              key={channelName}
+              onClick={() => handleClick(channelName)}
+              onKeyPress={() => handleClick(channelName)}
+              role="menuitem"
+              tabIndex={0}
             >
-              {channel}
+              {channelName}
             </div>
           ))}
         </div>
@@ -57,5 +62,11 @@ class Channels extends Component {
     );
   }
 }
+
+Channels.propTypes = {
+  channel: PropTypes.string.isRequired,
+  channels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default Channels;

@@ -54,9 +54,7 @@ const socketService = {
         if (a.username < b.username) {
           return -1;
         }
-        if (a.username > b.username) {
-          return 1;
-        }
+        return 1;
       });
       context.setState({
         users: newUsers,
@@ -81,9 +79,7 @@ const socketService = {
         if (a.username < b.username) {
           return -1;
         }
-        if (a.username > b.username) {
-          return 1;
-        }
+        return 1;
       });
       context.setState({
         users: newUsers,
@@ -101,11 +97,12 @@ const socketService = {
 
   listenChannel(context) {
     socket.on('channel', channel => {
-      const channels = context.state.channels.slice(1);
+      const { channels } = context.state;
       channels.push(channel);
-      channels.sort();
+      const newChannels = channels.slice(1);
+      newChannels.sort();
       context.setState({
-        channels: [context.state.channels[0], ...channels],
+        channels: ['default', ...newChannels],
       });
     });
   },

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import socket from '../services/socketService';
 import Authenticate from '../services/authenticateService';
 import styles from './Chatbox.css';
@@ -22,8 +23,9 @@ class Chatbox extends Component {
   handlePost(e) {
     e.preventDefault();
     e.target.reset();
+    const { channel } = this.props;
     const { message } = this.state;
-    socket.emitMessage(this.props.channel, {
+    socket.emitMessage(channel, {
       username: Authenticate.getUser(),
       text: message,
     });
@@ -34,9 +36,9 @@ class Chatbox extends Component {
       <div className={styles.chatbox}>
         <form className={styles.form} onSubmit={this.handlePost}>
           <input
+            className={styles.input}
             type="text"
             placeholder="Type your message here"
-            className={styles.input}
             onChange={this.handleChange}
           />
         </form>
@@ -44,5 +46,9 @@ class Chatbox extends Component {
     );
   }
 }
+
+Chatbox.propTypes = {
+  channel: PropTypes.string.isRequired,
+};
 
 export default Chatbox;

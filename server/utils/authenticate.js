@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken');
 
 const authenticate = {
-  generateToken: username => {
+  generateToken(username) {
     const payload = { username };
     return jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: 60 * 60 * 24,
     });
   },
 
-  verifyToken: (req, res, next) => {
+  verifyToken(req, res, next) {
     const bearerHeader = req.headers.authorization;
     if (bearerHeader) {
       const bearer = bearerHeader.split(' ');
@@ -20,7 +20,9 @@ const authenticate = {
     }
   },
 
-  verify: token => jwt.verify(token, process.env.JWT_SECRET),
+  verify(token) {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  },
 };
 
 module.exports = {

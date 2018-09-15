@@ -22,14 +22,13 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/', router);
 
 server.listen(port, () => {
-  console.log(`server running at ${port}`);
-
   io.on('connection', socket => {
-    socket.join('default');
-    socket.channel = 'default';
+    let username;
+    let channel = 'default';
+    socket.join(channel);
 
     socket.on('user connected', user => {
-      socket.username = user;
+      username = user;
       UserController.connect(
         io,
         user,
@@ -37,22 +36,24 @@ server.listen(port, () => {
     });
 
     socket.on('user disconnected', user => {
-      socket.leave(socket.channel);
+      socket.leave(channel);
       UserController.disconnect(socket, user);
     });
 
     socket.on('disconnect', () => {
-      UserController.disconnect(socket, socket.username);
+      UserController.disconnect(socket, username);
     });
 
-    socket.on('channel', channel => ChannelController.save(io, channel));
+    socket.on('channel', channelname =>
+      ChannelController.save(io, channelname),
+    );
 
     socket.on('message', msg => MessageController.save(io, msg));
 
-    socket.on('join', channel => {
-      socket.leave(socket.channel);
-      socket.channel = channel;
-      socket.join(channel);
+    socket.on('join', channelname => {
+      socket.leave(channel);
+      channel = channelname;
+      socket.join(channelname);
     });
   });
 });
