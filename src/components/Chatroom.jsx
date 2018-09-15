@@ -71,12 +71,18 @@ class Chatroom extends Component {
 
   fetchChannels() {
     axios.get('/api/channels', this.config).then(({ data }) => {
+      let newChannels;
       const index = data.indexOf('default');
-      data.splice(index, 1);
-      const channels = data.sort();
-      channels.unshift('default');
+      const { channels } = this.state;
+      if (index !== -1) {
+        data.splice(index, 1);
+        newChannels = data.sort();
+        newChannels.unshift('default');
+      } else {
+        newChannels = [...channels, ...data];
+      }
       this.setState({
-        channels,
+        channels: newChannels,
       });
     });
   }
