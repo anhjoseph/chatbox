@@ -31,11 +31,9 @@ const AuthenticationController = {
           res.status(200).send('That username is taken. Try another.');
         } else {
           User.create({
-            where: { username: req.body.username },
-            defaults: {
-              password: bcrypt.hashSync(req.body.password),
-              status: false,
-            },
+            username: req.body.username,
+            password: bcrypt.hashSync(req.body.password),
+            status: false,
           })
             .then(() => {
               res.status(201).send();
