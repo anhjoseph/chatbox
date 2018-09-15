@@ -16,7 +16,9 @@ const Message = ({ message }) => (
 );
 
 Message.propTypes = {
-  message: PropTypes.objectOf(PropTypes.string).isRequired,
+  message: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ).isRequired,
 };
 
 export default Message;

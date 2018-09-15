@@ -36,7 +36,7 @@ server.listen(port, () => {
     });
 
     socket.on('user disconnected', user => {
-      socket.leave(socket.channel);
+      socket.leave(channel);
       UserController.disconnect(socket, user);
     });
 
@@ -51,9 +51,9 @@ server.listen(port, () => {
     socket.on('message', msg => MessageController.save(io, msg));
 
     socket.on('join', channelname => {
-      socket.leave(socket.channel);
+      socket.leave(channel);
       channel = channelname;
-      socket.join(channel);
+      socket.join(channelname);
     });
   });
 });

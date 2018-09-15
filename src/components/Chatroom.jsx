@@ -111,7 +111,7 @@ class Chatroom extends Component {
   }
 
   render() {
-    const { channel, channels, messages, users } = this.state;
+    const { users, channels, channel, messages } = this.state;
     return (
       <div className={styles.chatroom}>
         <div className={styles.title}>{channel}</div>

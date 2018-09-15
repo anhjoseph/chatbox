@@ -25,7 +25,7 @@ class Channels extends Component {
   }
 
   render() {
-    const { channel, channels, handleClick } = this.props;
+    const { channels, channel, handleClick } = this.props;
     return (
       <aside className={styles.channels}>
         <form className={styles.form} onSubmit={this.handleSubmit}>
@@ -43,18 +43,18 @@ class Channels extends Component {
           </div>
         </form>
         <div className={styles.list}>
-          {channels.map(el => (
+          {channels.map(channelName => (
             <div
               className={
-                channel === el ? styles.currentChannel : styles.channel
+                channel === channelName ? styles.currentChannel : styles.channel
               }
-              key={channel}
-              onClick={() => handleClick(channel)}
-              onKeyPress={() => handleClick(channel)}
+              key={channelName}
+              onClick={() => handleClick(channelName)}
+              onKeyPress={() => handleClick(channelName)}
               role="menuitem"
               tabIndex={0}
             >
-              {channel}
+              {channelName}
             </div>
           ))}
         </div>
