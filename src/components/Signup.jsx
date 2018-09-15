@@ -28,12 +28,19 @@ class Signup extends Component {
         username,
         password,
       })
-      .then(() => {
-        history.push('/login');
+      .then(({ data }) => {
+        if (data) {
+          this.setState({
+            error: data,
+          });
+        } else {
+          history.push('/login');
+        }
       });
   }
 
   render() {
+    const { error } = this.state;
     return Authenticate.isAuthenticated() ? (
       <Redirect to="/" />
     ) : (
@@ -49,6 +56,7 @@ class Signup extends Component {
               maxLength="15"
               onChange={this.handleChange}
             />
+            <div className={styles.error}>{error}</div>
           </div>
           <div className={styles.info}>
             <input

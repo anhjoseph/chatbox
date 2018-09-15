@@ -5,9 +5,7 @@ const { authenticate } = require('../utils/authenticate');
 const AuthenticationController = {
   login: (req, res) => {
     User.findOne({
-      where: {
-        username: req.body.username,
-      },
+      where: { username: req.body.username },
     })
       .then(user => {
         if (bcrypt.compareSync(req.body.password, user.dataValues.password)) {
@@ -25,20 +23,26 @@ const AuthenticationController = {
   },
 
   signup: (req, res) => {
-    User.findOrCreate({
-      where: {
-        username: req.body.username,
-      },
-      defaults: {
-        password: bcrypt.hashSync(req.body.password),
-        status: false,
-      },
+    User.findOne({
+      where: { username: req.body.username },
     })
       .then(user => {
         if (user) {
-          res.status(200).send(user);
+          res.status(200).send('That username is taken. Try another.');
         } else {
-          res.sendStatus(201);
+          User.create({
+            where: { username: req.body.username },
+            defaults: {
+              password: bcrypt.hashSync(req.body.password),
+              status: false,
+            },
+          })
+            .then(() => {
+              res.status(201).send();
+            })
+            .catch(err => {
+              res.status(400).send(err);
+            });
         }
       })
       .catch(err => {
