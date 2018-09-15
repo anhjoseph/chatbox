@@ -6,8 +6,8 @@ import styles from './Messages.css';
 const Messages = ({ messages }) => (
   <main className={styles.messages}>
     <div className={styles.container}>
-      {messages.map((message, i) => (
-        <Message message={message} key={i} />
+      {messages.map(message => (
+        <Message message={message} key={message.id} />
       ))}
     </div>
   </main>
