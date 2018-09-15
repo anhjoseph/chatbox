@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import socket from '../services/socketService';
 import styles from './Channels.css';
 
@@ -61,5 +62,11 @@ class Channels extends Component {
     );
   }
 }
+
+Channels.propTypes = {
+  channel: PropTypes.string.isRequired,
+  channels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default Channels;

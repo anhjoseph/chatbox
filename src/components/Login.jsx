@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Authenticate from '../services/authenticateService';
@@ -86,5 +87,9 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: ReactRouterPropTypes.history.isRequired,
+};
 
 export default Login;

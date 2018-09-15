@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import socket from '../services/socketService';
 import Authenticate from '../services/authenticateService';
 import styles from './Chatbox.css';
@@ -45,5 +46,9 @@ class Chatbox extends Component {
     );
   }
 }
+
+Chatbox.propTypes = {
+  channel: PropTypes.string.isRequired,
+};
 
 export default Chatbox;

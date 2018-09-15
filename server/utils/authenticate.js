@@ -21,7 +21,7 @@ const authenticate = {
   },
 
   verify(token) {
-    jwt.verify(token, process.env.JWT_SECRET);
+    return jwt.verify(token, process.env.JWT_SECRET);
   },
 };
 

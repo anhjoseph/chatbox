@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import axios from 'axios';
 import Messages from './Messages';
 import Chatbox from './Chatbox';
@@ -135,5 +136,9 @@ class Chatroom extends Component {
     );
   }
 }
+
+Chatroom.propTypes = {
+  history: ReactRouterPropTypes.history.isRequired,
+};
 
 export default Chatroom;

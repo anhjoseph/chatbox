@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Authenticate from '../services/authenticateService';
@@ -66,5 +67,9 @@ class Signup extends Component {
     );
   }
 }
+
+Signup.propTypes = {
+  history: ReactRouterPropTypes.history.isRequired,
+};
 
 export default Signup;
