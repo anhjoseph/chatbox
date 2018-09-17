@@ -6,6 +6,12 @@ A node.js real-time chat application powered by Socket.io and Express
 * Database: **PostgreSQL**
 * Bundle: **Webpack**, **Babel**
 
+## Screenshots
+![Login Page](https://i.imgur.com/rFWH2el.png)
+
+![Chatroom](https://i.imgur.com/rUgZsbg.png)
+
+
 ## How To Use
 ```bash
 # Clone this repository
