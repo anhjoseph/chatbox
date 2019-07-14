@@ -11,25 +11,6 @@ A node.js real-time chat application powered by Socket.io and Express
 
 ![Chatroom](https://i.imgur.com/rUgZsbg.png)
 
-
-## How To Use
-```bash
-# Clone this repository
-$ git clone https://github.com/anhjoseph/real-time-chat.git
-
-# Go into the repository
-$ cd real-time-chat
-
-# Install dependencies
-$ npm install
-
-# Compile, bundle the app
-$ npm run build
-
-# Run the app
-$ npm start
-```
-
 ## Features
 * Signup and Login authentication with JWT and bcrypt
 * JWT-protected API routes
